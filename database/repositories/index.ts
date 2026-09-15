@@ -1,4 +1,4 @@
-export * from './base.repository.js';
+﻿export * from './base.repository.js';
 export * from './transaction_manager.js';
 export * from './unit_of_work.js';
 export * from './user.repository.js';
@@ -18,3 +18,9 @@ export * from './review.repository.js';
 export * from './address.repository.js';
 export * from './notification.repository.js';
 export * from './audit_log.repository.js';
+export * from './pessimistic_lock_manager.js';
+export * from './nested_savepoint_manager.js';
+export * from './bulk_operations_engine.js';
+export * from './repository_cache_decorator.js';
+export * from './criteria_builder.js';
+export * from './soft_delete_manager.js';
