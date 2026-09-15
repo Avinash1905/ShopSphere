@@ -574,6 +574,9 @@ export class MockDatabaseAdapter implements MigrationDatabaseAdapter {
             return String(rowVal) !== String(expectedVal) && rowVal !== expectedVal;
           }
           if (op === '>') {
+            if (typeof rowVal === 'string' && typeof expectedVal === 'string') {
+              return rowVal > expectedVal;
+            }
             return Number(rowVal) > Number(expectedVal);
           }
           if (op === '>=') {
@@ -583,6 +586,9 @@ export class MockDatabaseAdapter implements MigrationDatabaseAdapter {
             return Number(rowVal) >= Number(expectedVal);
           }
           if (op === '<') {
+            if (typeof rowVal === 'string' && typeof expectedVal === 'string') {
+              return rowVal < expectedVal;
+            }
             return Number(rowVal) < Number(expectedVal);
           }
           if (op === '<=') {

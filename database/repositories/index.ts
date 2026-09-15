@@ -1,4 +1,4 @@
-﻿export * from './base.repository.js';
+export * from './base.repository.js';
 export * from './transaction_manager.js';
 export * from './unit_of_work.js';
 export * from './user.repository.js';
@@ -24,3 +24,20 @@ export * from './bulk_operations_engine.js';
 export * from './repository_cache_decorator.js';
 export * from './criteria_builder.js';
 export * from './soft_delete_manager.js';
+
+// Extended Enterprise Domain Repositories
+export * from './user_mfa_repository.js';
+export * from './seller_kyc_repository.js';
+export * from './product_attribute_repository.js';
+export * from './warehouse_inventory_repository.js';
+export * from './order_fulfillment_repository.js';
+export * from './payment_gateway_repository.js';
+export * from './seller_settlement_repository.js';
+export * from './review_media_repository.js';
+export * from './notification_template_repository.js';
+export * from './security_ledger_repository.js';
+
+// Advanced Concurrency & Multi-Tenant Infrastructure
+export * from './optimistic_lock_engine.js';
+export * from './distributed_idempotency_store.js';
+export * from './multi_tenant_repository_base.js';

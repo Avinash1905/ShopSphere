@@ -5,6 +5,7 @@ import './integration/database_integration.test.js';
 import './integration/schema_extended.test.js';
 import './integration/schema_comparator.test.js';
 import './integration/repository_integration.test.js';
+import './integration/repository_extended.test.js';
 import './integration/repository_advanced.test.js';
 import './integration/search_integration.test.js';
 import './integration/search_advanced.test.js';
