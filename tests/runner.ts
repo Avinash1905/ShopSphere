@@ -12,6 +12,7 @@ import './integration/analytics_advanced.test.js';
 import './integration/security_integration.test.js';
 import './integration/security_advanced.test.js';
 import './integration/audit_integration.test.js';
+import './integration/audit_advanced.test.js';
 
 // Import E2E Tests
 import './e2e/checkout_flow_audit.test.js';

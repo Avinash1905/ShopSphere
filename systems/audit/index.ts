@@ -1,4 +1,4 @@
-export * from './audit_types.js';
+﻿export * from './audit_types.js';
 export * from './diff_engine.js';
 export * from './audit_storage.js';
 export * from './audit_query_engine.js';
@@ -6,3 +6,7 @@ export * from './compliance_reporter.js';
 export * from './audit_interceptor.js';
 export * from './audit_validator.js';
 export * from './audit_service.js';
+export * from './merkle_audit_tree.js';
+export * from './audit_lifecycle_archiver.js';
+export * from './pci_hipaa_compliance_auditor.js';
+export * from './audit_tamper_alarm.js';
