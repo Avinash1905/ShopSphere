@@ -11,6 +11,7 @@ import './integration/repository_extended.test.js';
 import './integration/repository_advanced.test.js';
 import './integration/search_integration.test.js';
 import './integration/search_advanced.test.js';
+import './integration/search_deep_dive.test.js';
 import './integration/analytics_integration.test.js';
 import './integration/analytics_advanced.test.js';
 import './integration/security_integration.test.js';
