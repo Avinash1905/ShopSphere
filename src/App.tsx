@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { AppRoutes } from './routes/AppRoutes';
+import { useUIStore } from './store/uiStore';
+import { useAuthStore } from './store/authStore';
+import { ToastContainer } from './components/common/Toast';
 
 export const App: React.FC = () => {
+  const { theme, toasts, removeToast } = useUIStore();
+  const { checkAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  // Sync dark class on root html element
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-surface-50 text-surface-900">
-      <div className="text-center p-8 bg-white rounded-2xl shadow-xl border border-surface-200 max-w-lg">
-        <h1 className="text-3xl font-bold text-brand-600 mb-2">ShopSphere Platform</h1>
-        <p className="text-surface-600">Frontend Foundation Initialized</p>
+    <BrowserRouter>
+      <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-indigo-500 selection:text-white antialiased transition-colors duration-200">
+        <AppRoutes />
+        <ToastContainer toasts={toasts} onClose={removeToast} />
       </div>
-    </div>
+    </BrowserRouter>
   );
 };
 
