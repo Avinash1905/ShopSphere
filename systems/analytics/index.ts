@@ -23,3 +23,6 @@ export * from './anomaly_root_cause_analyzer.js';
 export * from './clv_predictive_bayesian_model.js';
 export * from './coupon_elasticity_simulator.js';
 export * from './data_warehouse_star_schema_builder.js';
+
+export * from './wms_fulfillment_efficiency_analytics.js';
+export * from './carrier_shipping_rate_engine.js';

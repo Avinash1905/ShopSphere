@@ -17,3 +17,6 @@ export * from './fraud_pattern_detection_query.js';
 export * from './customer_lifetime_value_query.js';
 export * from './temporal_audit_diff_query.js';
 export * from './query_ast_rewriter.js';
+
+export * from './wms_pick_pack_routing_query.js';
+export * from './cycle_count_variance_query.js';

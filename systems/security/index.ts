@@ -20,3 +20,5 @@ export * from './envelope_aes_gcm_kms.js';
 export * from './distributed_ddos_syn_guard.js';
 export * from './zero_trust_device_fingerprint.js';
 export * from './pci_dss_tokenization_vault.js';
+
+export * from './customs_harmonized_tariff_engine.js';

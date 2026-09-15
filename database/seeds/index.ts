@@ -18,6 +18,7 @@ export * from './extended_payment_seeder.js';
 export * from './extended_engagement_seeder.js';
 export * from './extended_notification_seeder.js';
 export * from './extended_audit_seeder.js';
+export * from './16_extended_wms_seeder.js';
 
 import { SeedRunner } from './seed_runner.js';
 import { RolePermissionSeeder } from './role_permission_seeder.js';
@@ -35,6 +36,7 @@ import { ExtendedPaymentSeeder } from './extended_payment_seeder.js';
 import { ExtendedEngagementSeeder } from './extended_engagement_seeder.js';
 import { ExtendedNotificationSeeder } from './extended_notification_seeder.js';
 import { ExtendedAuditSeeder } from './extended_audit_seeder.js';
+import { ExtendedWMSSeeder } from './16_extended_wms_seeder.js';
 
 export function createDefaultSeedRunner(dbAdapter: any, seed: number = 42): SeedRunner {
   const runner = new SeedRunner(dbAdapter, seed);
@@ -53,5 +55,6 @@ export function createDefaultSeedRunner(dbAdapter: any, seed: number = 42): Seed
   runner.register(ExtendedEngagementSeeder);
   runner.register(ExtendedNotificationSeeder);
   runner.register(ExtendedAuditSeeder);
+  runner.register(ExtendedWMSSeeder);
   return runner;
 }

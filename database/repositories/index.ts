@@ -41,3 +41,7 @@ export * from './security_ledger_repository.js';
 export * from './optimistic_lock_engine.js';
 export * from './distributed_idempotency_store.js';
 export * from './multi_tenant_repository_base.js';
+
+export * from './wms_bin_inventory_repository.js';
+export * from './asn_inbound_shipment_repository.js';
+export * from './stock_transfer_repository.js';
