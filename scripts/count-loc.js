@@ -1,7 +1,7 @@
 /**
- * ShopSphere Recursive LOC (Lines of Code) Analyzer
- * Recursively scans all source files, configurations, schemas, and documentation
- * to calculate code lines, blank lines, comments, and total lines by directory and file type.
+ * ShopSphere Precision LOC (Lines of Code) Analyzer
+ * Strictly measures legitimate source code lines, comments, and blank lines.
+ * Excludes package-lock.json, node_modules, .git, dist, build, caches, and binaries.
  */
 
 import fs from 'fs';
@@ -15,7 +15,15 @@ const IGNORED_DIRS = new Set([
   '.cache',
   'coverage',
   '.gemini',
-  '.system_generated'
+  '.system_generated',
+  '.trainplex_staging'
+]);
+
+const IGNORED_FILES = new Set([
+  'package-lock.json',
+  'yarn.lock',
+  'pnpm-lock.yaml',
+  'ShopSphere-TrainPlex.zip'
 ]);
 
 const EXTENSIONS = new Set([
@@ -31,8 +39,7 @@ const EXTENSIONS = new Set([
   '.sql',
   '.prisma',
   '.yaml',
-  '.yml',
-  '.env'
+  '.yml'
 ]);
 
 const stats = {
@@ -48,8 +55,11 @@ const stats = {
 };
 
 function analyzeFile(filePath) {
+  const baseName = path.basename(filePath);
+  if (IGNORED_FILES.has(baseName)) return;
+
   const ext = path.extname(filePath).toLowerCase();
-  if (!EXTENSIONS.has(ext) && !path.basename(filePath).startsWith('.')) return;
+  if (!EXTENSIONS.has(ext)) return;
 
   const content = fs.readFileSync(filePath, 'utf8');
   const lines = content.split('\n');
@@ -114,12 +124,14 @@ function analyzeFile(filePath) {
   stats.byDirectory[topDir].comments += comment;
   stats.byDirectory[topDir].blanks += blank;
 
-  if (!stats.byExtension[ext || 'no-ext']) {
-    stats.byExtension[ext || 'no-ext'] = { files: 0, total: 0, code: 0 };
+  if (!stats.byExtension[ext]) {
+    stats.byExtension[ext] = { files: 0, total: 0, code: 0, comments: 0, blanks: 0 };
   }
-  stats.byExtension[ext || 'no-ext'].files++;
-  stats.byExtension[ext || 'no-ext'].total += fileTotal;
-  stats.byExtension[ext || 'no-ext'].code += code;
+  stats.byExtension[ext].files++;
+  stats.byExtension[ext].total += fileTotal;
+  stats.byExtension[ext].code += code;
+  stats.byExtension[ext].comments += comment;
+  stats.byExtension[ext].blanks += blank;
 }
 
 function scanDir(dir) {
@@ -135,28 +147,27 @@ function scanDir(dir) {
   }
 }
 
-console.log('🔍 Recursively analyzing ShopSphere codebase LOC...');
 scanDir(process.cwd());
 
-console.log('\n======================================================');
-console.log('         SHOPSPHERE RECURSIVE LOC REPORT              ');
-console.log('======================================================');
-console.log(`Total Files:         ${stats.totalFiles.toLocaleString()}`);
-console.log(`  - Source Files:    ${stats.sourceFiles.toLocaleString()}`);
-console.log(`  - Test Files:      ${stats.testFiles.toLocaleString()}`);
-console.log('------------------------------------------------------');
-console.log(`Total Lines (LOC):   ${stats.totalLines.toLocaleString()}`);
-console.log(`  - Actual Code:     ${stats.codeLines.toLocaleString()}`);
-console.log(`  - Comments:        ${stats.commentLines.toLocaleString()}`);
-console.log(`  - Blank Lines:     ${stats.blankLines.toLocaleString()}`);
-console.log('======================================================');
-console.log('Breakdown by Top-Level Directory:');
+console.log('\n==================================================================');
+console.log('                 SHOPSPHERE OFFICIAL LOC REPORT                   ');
+console.log('==================================================================');
+console.log(`Total Source Files:      ${stats.totalFiles.toLocaleString()}`);
+console.log(`  - Application Files:   ${stats.sourceFiles.toLocaleString()}`);
+console.log(`  - Test Files:          ${stats.testFiles.toLocaleString()}`);
+console.log('------------------------------------------------------------------');
+console.log(`SOURCE CODE LOC:         ${stats.codeLines.toLocaleString()}`);
+console.log(`Comment Lines:           ${stats.commentLines.toLocaleString()}`);
+console.log(`Blank Lines:             ${stats.blankLines.toLocaleString()}`);
+console.log(`Total Physical Lines:    ${stats.totalLines.toLocaleString()}`);
+console.log('==================================================================');
+console.log('LOC Breakdown by Directory:');
 for (const [dir, dStats] of Object.entries(stats.byDirectory)) {
-  console.log(`  📁 ${dir.padEnd(20)} | Files: ${String(dStats.files).padStart(4)} | Total Lines: ${dStats.total.toLocaleString().padStart(8)} | Code: ${dStats.code.toLocaleString().padStart(8)}`);
+  console.log(`  📁 ${dir.padEnd(16)} | Files: ${String(dStats.files).padStart(4)} | Source Code: ${dStats.code.toLocaleString().padStart(8)} | Comments: ${dStats.comments.toLocaleString().padStart(6)} | Total: ${dStats.total.toLocaleString().padStart(8)}`);
 }
-console.log('------------------------------------------------------');
-console.log('Breakdown by Extension:');
+console.log('------------------------------------------------------------------');
+console.log('LOC Breakdown by Language / Extension:');
 for (const [ext, eStats] of Object.entries(stats.byExtension)) {
-  console.log(`  📄 ${ext.padEnd(12)} | Files: ${String(eStats.files).padStart(4)} | Total Lines: ${eStats.total.toLocaleString().padStart(8)}`);
+  console.log(`  📄 ${ext.padEnd(12)} | Files: ${String(eStats.files).padStart(4)} | Source Code: ${eStats.code.toLocaleString().padStart(8)} | Total: ${eStats.total.toLocaleString().padStart(8)}`);
 }
-console.log('======================================================\n');
+console.log('==================================================================\n');
