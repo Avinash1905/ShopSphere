@@ -440,10 +440,13 @@ export class MockDatabaseAdapter implements MigrationDatabaseAdapter {
     return clauses.map((c) => {
       const eqIdx = c.indexOf('=');
       const col = c.substring(0, eqIdx).trim();
-      const rhs = c.substring(eqIdx + 1).trim();
+      let rhs = c.substring(eqIdx + 1).trim();
 
       if (rhs === '?') {
         return { col, isExpression: false, val: params[paramCursor.current++] };
+      }
+      if (rhs.includes('?')) {
+        rhs = rhs.replace(/\?/g, () => String(params[paramCursor.current++]));
       }
       if (/^CURRENT_TIMESTAMP$/i.test(rhs) || /^NOW\(\)$/i.test(rhs)) {
         return { col, isExpression: false, val: new Date().toISOString() };
