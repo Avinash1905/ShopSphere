@@ -1,4 +1,4 @@
-﻿export * from './runner.js';
+export * from './runner.js';
 export * from './migration_lock.js';
 export * from './migration_dry_run.js';
 export * from './migration_snapshot.js';
@@ -12,6 +12,16 @@ export * from './007_create_indexes_and_constraints.js';
 export * from './008_create_partitioned_tables.js';
 export * from './009_create_database_views.js';
 export * from './010_create_triggers.js';
+export * from './011_create_extended_auth_tables.js';
+export * from './012_create_extended_seller_tables.js';
+export * from './013_create_extended_catalog_tables.js';
+export * from './014_create_extended_inventory_tables.js';
+export * from './015_create_extended_order_tables.js';
+export * from './016_create_extended_payment_tables.js';
+export * from './017_create_extended_engagement_tables.js';
+export * from './018_create_extended_notification_tables.js';
+export * from './019_create_extended_audit_tables.js';
+export * from './020_create_extended_indexes_and_views.js';
 
 import { MigrationRunner } from './runner.js';
 import { Migration001CreateAuthTables } from './001_create_auth_tables.js';
@@ -24,6 +34,16 @@ import { Migration007CreateIndexesAndConstraints } from './007_create_indexes_an
 import { Migration008CreatePartitionedTables } from './008_create_partitioned_tables.js';
 import { Migration009CreateDatabaseViews } from './009_create_database_views.js';
 import { Migration010CreateTriggers } from './010_create_triggers.js';
+import { Migration011CreateExtendedAuthTables } from './011_create_extended_auth_tables.js';
+import { Migration012CreateExtendedSellerTables } from './012_create_extended_seller_tables.js';
+import { Migration013CreateExtendedCatalogTables } from './013_create_extended_catalog_tables.js';
+import { Migration014CreateExtendedInventoryTables } from './014_create_extended_inventory_tables.js';
+import { Migration015CreateExtendedOrderTables } from './015_create_extended_order_tables.js';
+import { Migration016CreateExtendedPaymentTables } from './016_create_extended_payment_tables.js';
+import { Migration017CreateExtendedEngagementTables } from './017_create_extended_engagement_tables.js';
+import { Migration018CreateExtendedNotificationTables } from './018_create_extended_notification_tables.js';
+import { Migration019CreateExtendedAuditTables } from './019_create_extended_audit_tables.js';
+import { Migration020CreateExtendedIndexesAndViews } from './020_create_extended_indexes_and_views.js';
 
 export function createDefaultMigrationRunner(dbAdapter: any): MigrationRunner {
   const runner = new MigrationRunner(dbAdapter);
@@ -37,5 +57,15 @@ export function createDefaultMigrationRunner(dbAdapter: any): MigrationRunner {
   runner.register(Migration008CreatePartitionedTables);
   runner.register(Migration009CreateDatabaseViews);
   runner.register(Migration010CreateTriggers);
+  runner.register(Migration011CreateExtendedAuthTables);
+  runner.register(Migration012CreateExtendedSellerTables);
+  runner.register(Migration013CreateExtendedCatalogTables);
+  runner.register(Migration014CreateExtendedInventoryTables);
+  runner.register(Migration015CreateExtendedOrderTables);
+  runner.register(Migration016CreateExtendedPaymentTables);
+  runner.register(Migration017CreateExtendedEngagementTables);
+  runner.register(Migration018CreateExtendedNotificationTables);
+  runner.register(Migration019CreateExtendedAuditTables);
+  runner.register(Migration020CreateExtendedIndexesAndViews);
   return runner;
 }

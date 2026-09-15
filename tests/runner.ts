@@ -4,6 +4,7 @@ import { TestRunner } from '../systems/testing/test_runner_framework.js';
 import './integration/database_integration.test.js';
 import './integration/schema_extended.test.js';
 import './integration/schema_comparator.test.js';
+import './integration/migration_seed_extended.test.js';
 import './integration/repository_integration.test.js';
 import './integration/repository_extended.test.js';
 import './integration/repository_advanced.test.js';
