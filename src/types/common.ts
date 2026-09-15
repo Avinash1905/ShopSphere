@@ -53,7 +53,8 @@ export interface Address {
   country: string;
   isDefaultShipping?: boolean;
   isDefaultBilling?: boolean;
-  type?: 'home' | 'office' | 'other';
+  isDefault?: boolean;
+  type?: 'home' | 'office' | 'work' | 'other';
 }
 
 export interface GeoLocation {

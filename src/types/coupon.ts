@@ -1,28 +1,35 @@
-export type CouponType = 'percentage' | 'fixed_amount' | 'free_shipping';
+export type CouponType = 'percentage' | 'fixed_amount' | 'fixed' | 'free_shipping';
 
 export type CouponStatus = 'active' | 'scheduled' | 'expired' | 'disabled';
 
 export interface Coupon {
   id: string;
   code: string;
-  title: string;
-  description: string;
-  discountType: CouponType;
-  discountValue: number; // e.g. 15 for 15% or 20 for $20
-  minimumOrderAmount: number;
-  maximumDiscountAmount?: number; // max cap for percentage discounts
+  title?: string;
+  description?: string;
+  discountType?: CouponType;
+  type?: any;
+  discountValue?: number;
+  value?: number;
+  minimumOrderAmount?: number;
+  minPurchase?: number;
+  maximumDiscountAmount?: number;
+  maxDiscount?: number;
   startDate: string;
   endDate: string;
-  usageLimitPerUser: number;
-  totalUsageLimit: number;
-  timesUsed: number;
-  status: CouponStatus;
-  sellerId?: string; // If undefined, applies globally
+  usageLimitPerUser?: number;
+  totalUsageLimit?: number;
+  usageLimit?: number;
+  timesUsed?: number;
+  usedCount?: number;
+  status?: CouponStatus;
+  isActive?: boolean;
+  sellerId?: string;
   sellerName?: string;
   applicableCategoryIds?: string[];
   applicableProductIds?: string[];
-  isGlobal: boolean;
-  createdAt: string;
+  isGlobal?: boolean;
+  createdAt?: string;
 }
 
 export interface CouponValidationResult {

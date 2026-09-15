@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useOrderStore } from '../../store/orderStore';
-import { useCartStore } from '../../store/cartStore';
-import { Order, OrderStatus } from '../../types';
 import { Card } from '../../components/common/Card';
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
@@ -11,7 +9,6 @@ import { Input } from '../../components/common/Input';
 import { PriceDisplay } from '../../components/ecommerce/PriceDisplay';
 import {
   ArrowLeft,
-  Package,
   Truck,
   CreditCard,
   MapPin,
@@ -21,14 +18,12 @@ import {
   AlertTriangle,
   CheckCircle2,
   Calendar,
-  HelpCircle,
 } from 'lucide-react';
 
 export const OrderDetailPage: React.FC = () => {
   const { orderId } = useParams<{ orderId: string }>();
   const navigate = useNavigate();
   const { currentOrder, getOrderById, cancelOrder, requestReturn, isLoading } = useOrderStore();
-  const { addToCart } = useCartStore();
 
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [isReturnModalOpen, setIsReturnModalOpen] = useState(false);
@@ -134,8 +129,7 @@ export const OrderDetailPage: React.FC = () => {
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-2">
                 <Calendar className="w-3.5 h-3.5 text-indigo-500" />
-                Placed on {new Date(order.createdAt).toLocaleDateString()} at{' '}
-                {new Date(order.createdAt).toLocaleTimeString()}
+                Placed on {new Date(order.createdAt).toLocaleDateString()}
               </p>
             </div>
 
@@ -168,11 +162,11 @@ export const OrderDetailPage: React.FC = () => {
                 <Truck className="w-3.5 h-3.5 text-indigo-500" /> Delivery Method
               </h4>
               <div className="text-sm text-slate-700 dark:text-slate-300 space-y-0.5">
-                <p className="font-semibold">{order.shippingMethod.name}</p>
+                <p className="font-semibold">{order.shippingMethod?.name || 'Standard Shipping'}</p>
                 <p className="text-xs text-indigo-600 dark:text-indigo-400 font-medium">
-                  ETA: {order.shippingMethod.estimatedDays}
+                  ETA: {order.shippingMethod?.estimatedDays || '3-5 business days'}
                 </p>
-                <p className="text-xs text-slate-500">Carrier: {order.shippingMethod.carrier || 'FedEx Express'}</p>
+                <p className="text-xs text-slate-500">Carrier: {order.shippingCarrier || order.shippingMethod?.carrier || 'FedEx Express'}</p>
               </div>
             </div>
 
@@ -181,13 +175,11 @@ export const OrderDetailPage: React.FC = () => {
                 <CreditCard className="w-3.5 h-3.5 text-indigo-500" /> Payment Info
               </h4>
               <div className="text-sm text-slate-700 dark:text-slate-300 space-y-0.5">
-                <p className="font-semibold capitalize">{order.paymentMethod.type} Payment</p>
+                <p className="font-semibold capitalize">{order.paymentMethod?.type || order.payment?.method || 'Card'} Payment</p>
                 <p className="text-xs text-slate-500">
-                  {order.paymentMethod.type === 'card'
-                    ? `Ending in •••• ${order.paymentMethod.details.last4 || '4242'}`
-                    : order.paymentMethod.type === 'upi'
-                    ? `UPI ID: ${order.paymentMethod.details.upiId}`
-                    : 'Cash on Delivery'}
+                  {order.paymentMethod?.details?.last4
+                    ? `Ending in •••• ${order.paymentMethod.details.last4}`
+                    : 'Verified Transaction'}
                 </p>
                 <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-md mt-1">
                   <CheckCircle2 className="w-3 h-3" /> Paid & Settled
@@ -206,39 +198,47 @@ export const OrderDetailPage: React.FC = () => {
           </div>
 
           <div className="divide-y divide-slate-100 dark:divide-slate-800 p-6">
-            {order.items.map((item) => (
-              <div key={item.id} className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <img
-                    src={item.product.images[0]?.url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=120'}
-                    alt={item.product.name}
-                    className="w-16 h-16 object-cover rounded-xl border border-slate-200 dark:border-slate-700 shrink-0"
-                  />
-                  <div>
-                    <Link
-                      to={`/product/${item.product.id}`}
-                      className="text-sm font-bold text-slate-900 dark:text-white hover:text-indigo-600 transition-colors line-clamp-1"
-                    >
-                      {item.product.name}
-                    </Link>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      Seller: <span className="font-medium text-slate-700 dark:text-slate-300">{item.product.sellerName}</span> • SKU: {item.product.sku}
-                    </p>
-                    <p className="text-xs text-slate-400 mt-0.5">
-                      Quantity: <span className="font-bold text-slate-700 dark:text-slate-300">{item.quantity}</span> × ${(item.selectedVariant?.price || item.product.price).toFixed(2)}
-                    </p>
+            {order.items.map((item) => {
+              const pTitle = item.product?.title || item.product?.name || item.productTitle || 'Product Item';
+              const pImage = item.product?.images?.[0]?.url || item.productImage || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=120';
+              const pSeller = item.product?.sellerName || item.sellerName || 'ShopSphere Seller';
+              const pSku = item.product?.sku || item.sku || 'N/A';
+              const itemPrice = item.selectedVariant?.price || item.variant?.price || item.product?.price || item.unitPrice || 0;
+
+              return (
+                <div key={item.id} className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={pImage}
+                      alt={pTitle}
+                      className="w-16 h-16 object-cover rounded-xl border border-slate-200 dark:border-slate-700 shrink-0"
+                    />
+                    <div>
+                      <Link
+                        to={item.product?.id ? `/product/${item.product.id}` : '#'}
+                        className="text-sm font-bold text-slate-900 dark:text-white hover:text-indigo-600 transition-colors line-clamp-1"
+                      >
+                        {pTitle}
+                      </Link>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Seller: <span className="font-medium text-slate-700 dark:text-slate-300">{pSeller}</span> • SKU: {pSku}
+                      </p>
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        Quantity: <span className="font-bold text-slate-700 dark:text-slate-300">{item.quantity}</span> × ${itemPrice.toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <PriceDisplay
+                      price={itemPrice * item.quantity}
+                      size="md"
+                      className="font-bold"
+                    />
                   </div>
                 </div>
-
-                <div className="text-right">
-                  <PriceDisplay
-                    price={(item.selectedVariant?.price || item.product.price) * item.quantity}
-                    size="md"
-                    className="font-bold"
-                  />
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Pricing Breakdown Summary */}
@@ -248,19 +248,19 @@ export const OrderDetailPage: React.FC = () => {
                 <span>Subtotal</span>
                 <span>${order.subtotal.toFixed(2)}</span>
               </div>
-              {order.discount > 0 && (
+              {(order.discount || 0) > 0 && (
                 <div className="flex justify-between text-emerald-600 dark:text-emerald-400 font-medium">
                   <span>Discount {order.couponCode ? `(${order.couponCode})` : ''}</span>
-                  <span>-${order.discount.toFixed(2)}</span>
+                  <span>-${(order.discount || 0).toFixed(2)}</span>
                 </div>
               )}
               <div className="flex justify-between text-slate-600 dark:text-slate-400">
                 <span>Shipping Fee</span>
-                <span>${order.shippingFee.toFixed(2)}</span>
+                <span>${(order.shippingFee || 0).toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-slate-600 dark:text-slate-400">
                 <span>Tax</span>
-                <span>${order.tax.toFixed(2)}</span>
+                <span>${(order.tax || 0).toFixed(2)}</span>
               </div>
               <div className="border-t border-slate-200 dark:border-slate-700 pt-3 flex justify-between items-center text-base font-black text-slate-900 dark:text-white">
                 <span>Grand Total</span>
@@ -294,7 +294,7 @@ export const OrderDetailPage: React.FC = () => {
               <Input
                 placeholder="e.g. Ordered by mistake, found better price"
                 value={cancelReason}
-                onChange={(e) => setCancelReason(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCancelReason(e.target.value)}
               />
             </div>
 
@@ -344,7 +344,7 @@ export const OrderDetailPage: React.FC = () => {
                 rows={3}
                 placeholder="Provide details to expedite return verification..."
                 value={returnNotes}
-                onChange={(e) => setReturnNotes(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReturnNotes(e.target.value)}
                 className="w-full px-3 py-2 text-sm border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
               />
             </div>

@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { RatingStars } from '../../components/ecommerce/RatingStars';
 import {
-  MessageSquare,
-  AlertTriangle,
   CheckCircle2,
   Trash2,
   ShieldAlert,
-  User,
 } from 'lucide-react';
 
 interface FlaggedReview {

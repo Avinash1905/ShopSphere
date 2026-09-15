@@ -11,10 +11,12 @@ export const addressSchema = z.object({
   country: z.string().min(2, 'Country is required').default('United States'),
   isDefaultShipping: z.boolean().optional().default(false),
   isDefaultBilling: z.boolean().optional().default(false),
-  type: z.enum(['home', 'office', 'other']).default('home'),
+  isDefault: z.boolean().optional().default(false),
+  type: z.enum(['home', 'office', 'work', 'other']).default('home'),
 });
 
 export type AddressFormData = z.infer<typeof addressSchema>;
+export type AddressFormValues = AddressFormData;
 
 export const creditCardPaymentSchema = z.object({
   cardholderName: z.string().min(2, 'Cardholder name is required'),

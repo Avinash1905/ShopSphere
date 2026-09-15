@@ -101,17 +101,19 @@ export const OrderReviewStep: React.FC<OrderReviewStepProps> = ({
           {paymentMethod ? (
             <div className="text-xs text-slate-600 dark:text-slate-400 space-y-1">
               <div className="flex items-center gap-2">
-                <Badge variant="success" size="sm">
-                  {paymentMethod.type.toUpperCase()}
+                <Badge variant="primary" size="sm">
+                  {(typeof paymentMethod === 'string' ? paymentMethod : (paymentMethod as any)?.type || 'CARD').toUpperCase()}
                 </Badge>
               </div>
               <p className="font-medium text-slate-900 dark:text-slate-200 capitalize">
-                {paymentMethod.type === 'card'
-                  ? `${paymentMethod.details.cardBrand || 'Card'} ending in ${paymentMethod.details.last4 || '4242'}`
-                  : paymentMethod.type === 'upi'
-                  ? `UPI ID: ${paymentMethod.details.upiId || 'user@upi'}`
-                  : paymentMethod.type === 'netbanking'
-                  ? `Bank: ${paymentMethod.details.bankName || 'Standard Bank'}`
+                {typeof paymentMethod === 'string'
+                  ? paymentMethod.replace('_', ' ')
+                  : (paymentMethod as any)?.type === 'card'
+                  ? `${(paymentMethod as any)?.details?.cardBrand || 'Card'} ending in ${(paymentMethod as any)?.details?.last4 || '4242'}`
+                  : (paymentMethod as any)?.type === 'upi'
+                  ? `UPI ID: ${(paymentMethod as any)?.details?.upiId || 'user@upi'}`
+                  : (paymentMethod as any)?.type === 'netbanking'
+                  ? `Bank: ${(paymentMethod as any)?.details?.bankName || 'Standard Bank'}`
                   : 'Cash on Delivery'}
               </p>
               <p className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-medium">
@@ -154,7 +156,7 @@ export const OrderReviewStep: React.FC<OrderReviewStepProps> = ({
               </div>
               <div className="text-right">
                 <PriceDisplay
-                  price={(item.selectedVariant?.price || item.product.price) * item.quantity}
+                  price={(item.variant?.price || item.unitPrice || item.product.price) * item.quantity}
                   size="sm"
                 />
               </div>

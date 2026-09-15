@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import {
-  ShieldCheck,
-  Building2,
   FileText,
   CheckCircle2,
-  XCircle,
   Eye,
-  Mail,
-  Phone,
-  Calendar,
 } from 'lucide-react';
 
 interface PendingKYC {

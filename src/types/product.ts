@@ -1,4 +1,4 @@
-export type ProductStatus = 'draft' | 'pending_approval' | 'active' | 'rejected' | 'archived';
+export type ProductStatus = 'draft' | 'pending_approval' | 'pending' | 'active' | 'rejected' | 'archived';
 
 export type StockStatus = 'in_stock' | 'low_stock' | 'out_of_stock' | 'preorder';
 
@@ -9,10 +9,13 @@ export interface Category {
   description?: string;
   icon?: string;
   imageUrl?: string;
+  image?: string;
   parentId?: string | null;
   subcategories?: Category[];
   itemCount?: number;
+  productCount?: number;
   featured?: boolean;
+  isFeatured?: boolean;
 }
 
 export interface Brand {
@@ -27,29 +30,32 @@ export interface Brand {
 
 export interface ProductAttributeOption {
   id: string;
-  name: string;      // e.g., 'Midnight Black', 'Space Gray', '128GB', 'XL'
-  value: string;     // e.g., '#111827', '128gb'
+  name: string;
+  value: string;
   imageExtraUrl?: string;
 }
 
 export interface ProductAttribute {
   id: string;
-  name: string;      // e.g., 'Color', 'Size', 'Storage', 'Material'
+  name: string;
   type: 'color' | 'size' | 'select' | 'text';
   options: ProductAttributeOption[];
 }
 
 export interface ProductVariant {
   id: string;
-  productId: string;
+  productId?: string;
   sku: string;
-  title: string;     // e.g., "iPhone 15 Pro - Space Gray / 256GB"
+  name?: string;
+  title?: string;
   price: number;
   originalPrice?: number;
+  compareAtPrice?: number;
   costPrice?: number;
   inventoryQuantity: number;
-  stockStatus: StockStatus;
-  attributes: Record<string, string>; // { "Color": "Space Gray", "Storage": "256GB" }
+  stock?: number;
+  stockStatus?: StockStatus;
+  attributes: Record<string, string>;
   barcode?: string;
   imageUrl?: string;
   weightKg?: number;
@@ -58,15 +64,16 @@ export interface ProductVariant {
 export interface ProductImage {
   id: string;
   url: string;
-  altText: string;
+  altText?: string;
+  alt?: string;
   isPrimary: boolean;
-  order: number;
+  order?: number;
 }
 
 export interface ProductSpecification {
-  group: string; // e.g., "General", "Display", "Battery", "Dimensions"
-  key: string;   // e.g., "Screen Size"
-  value: string; // e.g., "6.7 inches OLED"
+  group?: string;
+  key: string;
+  value: string;
 }
 
 export interface Product {
@@ -74,25 +81,29 @@ export interface Product {
   sellerId: string;
   sellerName: string;
   title: string;
+  name?: string;
   slug: string;
-  shortDescription: string;
+  shortDescription?: string;
   description: string;
   brand: Brand;
   category: Category;
+  categoryId?: string;
   subCategory?: Category;
   tags: string[];
   price: number;
   originalPrice?: number;
+  compareAtPrice?: number;
   discountPercentage?: number;
-  currency: string;
+  currency?: string;
   status: ProductStatus;
   stockStatus: StockStatus;
   totalInventory: number;
+  stock?: number;
   sku: string;
   images: ProductImage[];
-  attributes: ProductAttribute[];
+  attributes?: ProductAttribute[];
   variants: ProductVariant[];
-  specifications: ProductSpecification[];
+  specifications: ProductSpecification[] | any;
   rating: number;
   reviewCount: number;
   featured?: boolean;
@@ -100,9 +111,9 @@ export interface Product {
   isDealOfTheDay?: boolean;
   isNewArrival?: boolean;
   isBestSeller?: boolean;
-  returnPolicyDays: number;
+  returnPolicyDays?: number;
   warrantyInfo?: string;
-  shippingWeightKg: number;
+  shippingWeightKg?: number;
   createdAt: string;
   updatedAt: string;
 }

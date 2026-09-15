@@ -2,6 +2,8 @@ import { Address } from './common';
 import { Product, ProductVariant } from './product';
 
 export type OrderStatus =
+  | 'placed'
+  | 'confirmed'
   | 'pending_payment'
   | 'payment_confirmed'
   | 'processing'
@@ -13,26 +15,30 @@ export type OrderStatus =
   | 'returned'
   | 'refunded';
 
-export type PaymentMethodType = 'credit_card' | 'debit_card' | 'upi' | 'netbanking' | 'cod' | 'wallet';
+export type PaymentMethodType = 'credit_card' | 'debit_card' | 'card' | 'upi' | 'netbanking' | 'cod' | 'wallet';
+export type PaymentMethod = PaymentMethodType;
+export type ShippingMethod = any;
+export type CheckoutStep = 'address' | 'shipping' | 'payment' | 'review' | 'confirmation';
 
 export type PaymentStatus = 'pending' | 'processing' | 'completed' | 'failed' | 'refunded' | 'cancelled';
 
 export interface OrderItem {
   id: string;
-  orderId: string;
+  orderId?: string;
   productId: string;
   variantId?: string;
-  sellerId: string;
-  sellerName: string;
-  productTitle: string;
-  productImage: string;
-  sku: string;
+  sellerId?: string;
+  sellerName?: string;
+  productTitle?: string;
+  productImage?: string;
+  sku?: string;
   attributes?: Record<string, string>;
   quantity: number;
   unitPrice: number;
   totalPrice: number;
-  product?: Product;
+  product: Product;
   variant?: ProductVariant;
+  selectedVariant?: ProductVariant;
 }
 
 export interface TrackingEvent {
@@ -48,62 +54,72 @@ export interface TrackingEvent {
 
 export interface PaymentDetails {
   method: PaymentMethodType;
-  transactionId: string;
-  status: PaymentStatus;
+  transactionId?: string;
+  status?: PaymentStatus;
   paidAt?: string;
   cardLastFour?: string;
   cardBrand?: string;
   upiId?: string;
   bankName?: string;
-  amount: number;
+  amount?: number;
 }
 
 export interface ReturnRequest {
   id: string;
   orderId: string;
-  orderItemId: string;
-  userId: string;
-  sellerId: string;
-  reason: 'defective' | 'wrong_item' | 'not_as_described' | 'size_fit' | 'changed_mind' | 'arrived_late';
-  detailedReason: string;
-  status: 'requested' | 'approved' | 'rejected' | 'pickup_scheduled' | 'item_received' | 'refunded';
-  refundAmount: number;
-  refundMethod: 'original_payment' | 'wallet_credit';
-  photos: string[];
-  createdAt: string;
+  orderItemId?: string;
+  userId?: string;
+  sellerId?: string;
+  reason: 'defective' | 'wrong_item' | 'not_as_described' | 'size_fit' | 'changed_mind' | 'arrived_late' | string;
+  detailedReason?: string;
+  status: 'requested' | 'approved' | 'rejected' | 'pickup_scheduled' | 'item_received' | 'refunded' | 'pending';
+  refundAmount?: number;
+  amount?: number;
+  customerName?: string;
+  productName?: string;
+  date?: string;
+  refundMethod?: 'original_payment' | 'wallet_credit' | 'original' | 'credit';
+  photos?: string[];
+  createdAt?: string;
   resolvedAt?: string;
   sellerNotes?: string;
 }
 
 export interface Order {
   id: string;
-  orderNumber: string; // e.g. "ORD-2026-98124"
-  userId: string;
-  customerName: string;
-  customerEmail: string;
-  customerPhone: string;
+  orderNumber?: string;
+  userId?: string;
+  customerName?: string;
+  customerEmail?: string;
+  customerPhone?: string;
   items: OrderItem[];
   shippingAddress: Address;
-  billingAddress: Address;
-  shippingCarrier: string;
+  billingAddress?: Address;
+  shippingCarrier?: string;
+  shippingMethod?: any;
   shippingTrackingNumber?: string;
-  estimatedDeliveryDate: string;
+  estimatedDeliveryDate?: string;
   deliveredAt?: string;
   status: OrderStatus;
   subtotal: number;
-  discountAmount: number;
+  discountAmount?: number;
+  discount?: number;
   couponCode?: string;
-  taxAmount: number;
-  shippingCost: number;
-  grandTotal: number;
-  payment: PaymentDetails;
-  trackingEvents: TrackingEvent[];
+  taxAmount?: number;
+  tax?: number;
+  shippingCost?: number;
+  shippingFee?: number;
+  grandTotal?: number;
+  total: number;
+  payment?: PaymentDetails;
+  paymentMethod?: any;
+  trackingEvents?: TrackingEvent[];
   cancelReason?: string;
   cancelledAt?: string;
   notes?: string;
   returnRequests?: ReturnRequest[];
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }
 
 export interface Invoice {

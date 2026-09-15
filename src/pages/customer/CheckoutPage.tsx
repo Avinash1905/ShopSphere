@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '../../store/cartStore';
 import { useCheckoutStore } from '../../store/checkoutStore';
 import { useOrderStore } from '../../store/orderStore';
-import { useAuthStore } from '../../store/authStore';
 import { CheckoutStepper } from '../../features/checkout/CheckoutStepper';
 import { AddressStep } from '../../features/checkout/AddressStep';
 import { ShippingStep } from '../../features/checkout/ShippingStep';
@@ -11,13 +10,11 @@ import { PaymentStep } from '../../features/checkout/PaymentStep';
 import { OrderReviewStep } from '../../features/checkout/OrderReviewStep';
 import { CartSummaryCard } from '../../features/cart/CartSummaryCard';
 import { Address, ShippingMethod, PaymentMethod, CheckoutStep } from '../../types';
-import { ShieldCheck, Lock, AlertTriangle } from 'lucide-react';
-import { Button } from '../../components/common/Button';
+import { ShieldCheck, Lock } from 'lucide-react';
 
 export const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
   const { cart, clearCart } = useCartStore();
-  const { isAuthenticated } = useAuthStore();
   const {
     currentStep,
     shippingAddress,
@@ -195,14 +192,20 @@ export const CheckoutPage: React.FC = () => {
           {/* Persistent Order Summary Sidebar */}
           <div className="lg:col-span-4 space-y-6">
             <CartSummaryCard
-              subtotal={cart.subtotal}
-              discount={cart.discount}
-              tax={cart.tax}
-              shipping={shippingFee}
-              total={grandTotal}
-              appliedCoupon={cart.coupon}
-              onCheckout={() => {}}
-              hideCheckoutButton
+              summary={{
+                itemsCount: cart.items.length,
+                totalQuantity: cart.items.reduce((s, i) => s + i.quantity, 0),
+                subtotal: cart.subtotal,
+                discountAmount: cart.discount,
+                taxAmount: cart.tax,
+                estimatedShipping: shippingFee,
+                grandTotal: grandTotal,
+                freeShippingThreshold: 75,
+                amountNeededForFreeShipping: 0,
+                appliedCoupon: cart.coupon,
+              }}
+              onApplyCoupon={async () => {}}
+              onRemoveCoupon={() => {}}
             />
 
             <div className="bg-slate-100/70 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 space-y-2">

@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import { Category } from '../../types';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import {
-  FolderTree,
   Plus,
-  Edit3,
   Trash2,
-  ChevronRight,
   Folder,
-  Layers,
-  Image as ImageIcon,
 } from 'lucide-react';
 
 export const CategoryManagerPage: React.FC = () => {

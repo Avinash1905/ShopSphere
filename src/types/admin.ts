@@ -17,17 +17,23 @@ export interface PlatformStats {
 
 export interface AuditLog {
   id: string;
-  actorId: string;
-  actorName: string;
-  actorRole: string;
-  actorEmail: string;
-  action: string;      // e.g. "USER_BANNED", "PRODUCT_APPROVED", "REFUND_ISSUED"
-  resourceType: string;// e.g. "product", "seller", "user", "order", "coupon"
-  resourceId: string;
-  details: string;
-  ipAddress: string;
-  userAgent: string;
-  timestamp: string;
+  actorId?: string;
+  actorName?: string;
+  actorRole?: string;
+  actorEmail?: string;
+  userId?: string;
+  userName?: string;
+  userEmail?: string;
+  action: string;
+  resourceType?: string;
+  resourceId?: string;
+  entityType?: string;
+  entityId?: string;
+  details?: any;
+  ipAddress?: string;
+  userAgent?: string;
+  timestamp?: string;
+  createdAt?: string;
 }
 
 export interface PlatformSettings {

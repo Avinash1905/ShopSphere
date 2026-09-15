@@ -33,7 +33,7 @@ export const ProductDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { selectedProduct, fetchProductBySlug, products, isLoading } = useProductStore();
-  const { addItem, openCartDrawer } = useCartStore();
+  const { addItem } = useCartStore();
   const { isInWishlist, toggleWishlist } = useWishlistStore();
   const { addToast } = useUiStore();
 

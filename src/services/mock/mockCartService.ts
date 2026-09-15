@@ -63,25 +63,30 @@ export class MockCartService implements ICartService {
 
     if (appliedCouponCode) {
       const coupons = mockStorage.getCoupons();
-      const coupon = coupons.find((c) => c.code.toUpperCase() === appliedCouponCode.toUpperCase() && c.status === 'active');
-      if (coupon && subtotal >= coupon.minimumOrderAmount) {
-        if (coupon.discountType === 'percentage') {
-          const rawDiscount = (subtotal * coupon.discountValue) / 100;
-          discountAmount = coupon.maximumDiscountAmount
-            ? Math.min(rawDiscount, coupon.maximumDiscountAmount)
+      const coupon = coupons.find((c) => c.code.toUpperCase() === appliedCouponCode.toUpperCase() && (c.status === 'active' || c.isActive));
+      const minOrder = coupon?.minimumOrderAmount ?? coupon?.minPurchase ?? 0;
+      const discountType = ((coupon?.discountType || coupon?.type || 'percentage') === 'free_shipping' ? 'free_shipping' : (coupon?.discountType || coupon?.type || 'percentage') === 'fixed_amount' || (coupon?.discountType || coupon?.type) === 'fixed' ? 'fixed_amount' : 'percentage');
+      const discountVal = coupon?.discountValue ?? coupon?.value ?? 0;
+      const maxDiscount = coupon?.maximumDiscountAmount ?? coupon?.maxDiscount;
+
+      if (coupon && subtotal >= minOrder) {
+        if (discountType === 'percentage') {
+          const rawDiscount = (subtotal * discountVal) / 100;
+          discountAmount = maxDiscount
+            ? Math.min(rawDiscount, maxDiscount)
             : rawDiscount;
-        } else if (coupon.discountType === 'fixed_amount') {
-          discountAmount = Math.min(coupon.discountValue, subtotal);
-        } else if (coupon.discountType === 'free_shipping') {
+        } else if (discountType === 'fixed_amount') {
+          discountAmount = Math.min(discountVal, subtotal);
+        } else if (discountType === 'free_shipping') {
           discountAmount = 0; // handled in shipping
         }
 
         appliedCoupon = {
           code: coupon.code,
-          discountType: coupon.discountType,
-          discountValue: coupon.discountValue,
-          discountAmount,
-          description: coupon.description,
+          discountType: discountType as 'percentage' | 'fixed_amount' | 'free_shipping',
+          discountValue: discountVal,
+          discountAmount: Number(discountAmount.toFixed(2)),
+          description: coupon.description || coupon.title || '',
         };
       }
     }

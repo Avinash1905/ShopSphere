@@ -13,8 +13,9 @@ export const ProductSpecs: React.FC<ProductSpecsProps> = ({ specifications }) =>
   // Group specifications by group name
   const grouped: Record<string, ProductSpecification[]> = {};
   specifications.forEach((spec) => {
-    if (!grouped[spec.group]) grouped[spec.group] = [];
-    grouped[spec.group].push(spec);
+    const groupName = spec.group || 'General';
+    if (!grouped[groupName]) grouped[groupName] = [];
+    grouped[groupName].push(spec);
   });
 
   return (

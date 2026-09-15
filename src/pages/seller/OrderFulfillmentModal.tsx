@@ -4,7 +4,7 @@ import { Modal } from '../../components/common/Modal';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
-import { Truck, Package, Printer, CheckCircle2, QrCode } from 'lucide-react';
+import { Truck, Printer, CheckCircle2, QrCode } from 'lucide-react';
 
 interface OrderFulfillmentModalProps {
   order: Order | null;

@@ -9,7 +9,7 @@ import { Modal } from '../../components/common/Modal';
 import { Check, Plus, MapPin, Edit3, Trash2, Home, Briefcase } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { addressSchema, AddressFormValues } from '../../schemas/addressSchema';
+import { addressSchema, AddressFormValues } from '../../schemas/checkoutSchemas';
 
 interface AddressStepProps {
   selectedAddressId: string | null;

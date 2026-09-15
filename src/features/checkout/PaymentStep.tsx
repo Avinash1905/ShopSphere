@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { PaymentMethod, PaymentType } from '../../types';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
@@ -10,17 +9,16 @@ import {
   QrCode,
   Building2,
   Banknote,
-  ShieldCheck,
   Lock,
   CheckCircle2,
-  AlertCircle,
-  RefreshCw,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
+export type PaymentType = 'card' | 'upi' | 'netbanking' | 'cod';
+
 interface PaymentStepProps {
-  selectedPaymentMethod: PaymentMethod | null;
-  onSelectPayment: (method: PaymentMethod) => void;
+  selectedPaymentMethod: any;
+  onSelectPayment: (method: any) => void;
   onProceed: () => void;
   onBack: () => void;
   orderTotal: number;
@@ -57,7 +55,6 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
   // UPI State
   const [upiId, setUpiId] = useState('');
   const [upiMode, setUpiMode] = useState<'vpa' | 'qr'>('vpa');
-  const [isQrScanned, setIsQrScanned] = useState(false);
 
   // Netbanking State
   const [selectedBank, setSelectedBank] = useState('');
@@ -113,7 +110,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
   const handleApplyCard = () => {
     if (!cardNumber || !cardHolder || !expiry || !cvv) return;
     const clean = cardNumber.replace(/\s+/g, '');
-    const method: PaymentMethod = {
+    const method: any = {
       id: `pm_${Date.now()}`,
       type: 'card',
       details: {
@@ -146,7 +143,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
   };
 
   const handleApplyUPI = () => {
-    const method: PaymentMethod = {
+    const method: any = {
       id: `pm_upi_${Date.now()}`,
       type: 'upi',
       details: {
@@ -160,7 +157,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
   const handleApplyNetbanking = () => {
     if (!selectedBank) return;
     const bankName = POPULAR_BANKS.find((b) => b.id === selectedBank)?.name || selectedBank;
-    const method: PaymentMethod = {
+    const method: any = {
       id: `pm_nb_${Date.now()}`,
       type: 'netbanking',
       details: {
@@ -172,7 +169,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
   };
 
   const handleApplyCOD = () => {
-    const method: PaymentMethod = {
+    const method: any = {
       id: `pm_cod_${Date.now()}`,
       type: 'cod',
       details: {},
@@ -364,10 +361,7 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
                   </p>
                 </div>
                 <Button
-                  onClick={() => {
-                    setIsQrScanned(true);
-                    handleApplyUPI();
-                  }}
+                  onClick={handleApplyUPI}
                   className="gap-2"
                 >
                   <CheckCircle2 className="w-4 h-4" /> Simulate QR Scan & Pay

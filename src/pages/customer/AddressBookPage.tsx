@@ -6,10 +6,10 @@ import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import { Input } from '../../components/common/Input';
-import { MapPin, Plus, Edit3, Trash2, Home, Briefcase, Check } from 'lucide-react';
+import { Plus, Edit3, Trash2, Home, Briefcase } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { addressSchema, AddressFormValues } from '../../schemas/addressSchema';
+import { addressSchema, AddressFormValues } from '../../schemas/checkoutSchemas';
 
 export const AddressBookPage: React.FC = () => {
   const { user } = useAuthStore();
@@ -115,7 +115,7 @@ export const AddressBookPage: React.FC = () => {
         ...data,
       };
       if (data.isDefault) {
-        setAddresses(addresses.map((a) => ({ ...a, isDefault: false })).concat(newAddr));
+        setAddresses([...addresses.map((a) => ({ ...a, isDefault: false })), newAddr]);
       } else {
         setAddresses([...addresses, newAddr]);
       }

@@ -5,7 +5,7 @@ import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
-import { Tag, Plus, Trash2, Edit3, CheckCircle2, Calendar } from 'lucide-react';
+import { Tag, Plus, Trash2 } from 'lucide-react';
 
 export const SellerCouponsPage: React.FC = () => {
   const [coupons, setCoupons] = useState<Coupon[]>([

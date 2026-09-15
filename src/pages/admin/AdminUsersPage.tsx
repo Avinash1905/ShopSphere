@@ -1,29 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdminStore } from '../../store/adminStore';
-import { User, UserRole } from '../../types';
-import { Card } from '../../components/common/Card';
+import { User } from '../../types';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
 import { Avatar } from '../../components/common/Avatar';
 import { Modal } from '../../components/common/Modal';
 import {
-  Users,
   Search,
-  Shield,
-  Ban,
-  CheckCircle2,
   Eye,
-  Mail,
-  MoreVertical,
-  Filter,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
 export const AdminUsersPage: React.FC = () => {
   const navigate = useNavigate();
-  const { users, fetchUsers, updateUserStatus, updateUserRole } = useAdminStore();
+  const { users, fetchUsers, updateUserStatus } = useAdminStore();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
@@ -34,8 +26,9 @@ export const AdminUsersPage: React.FC = () => {
   }, [fetchUsers]);
 
   const filtered = users.filter((u) => {
+    const userName = u.name || u.fullName || '';
     const matchesSearch =
-      u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       u.email.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesRole = roleFilter === 'all' || u.role === roleFilter;
     return matchesSearch && matchesRole;
@@ -43,7 +36,7 @@ export const AdminUsersPage: React.FC = () => {
 
   const handleToggleBan = (u: User) => {
     const newStatus = u.status === 'banned' ? 'active' : 'banned';
-    updateUserStatus(u.id, newStatus);
+    updateUserStatus(u.id, newStatus, 'Status modified by administrator');
     setSelectedUserForBan(null);
   };
 
@@ -135,7 +128,7 @@ export const AdminUsersPage: React.FC = () => {
                       variant={
                         u.status === 'banned'
                           ? 'danger'
-                          : u.status === 'pending'
+                          : u.status === 'suspended' || u.status === 'pending_verification'
                           ? 'warning'
                           : 'success'
                       }

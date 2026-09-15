@@ -10,6 +10,7 @@ interface CheckoutState {
   billingAddress: Address | null;
   sameBillingAddress: boolean;
   selectedShippingOption: ShippingOption | null;
+  shippingMethod: any | null;
   paymentMethod: PaymentMethodType;
   cardDetails: any;
   upiId: string;
@@ -24,11 +25,13 @@ interface CheckoutState {
   setBillingAddress: (address: Address) => void;
   setSameBillingAddress: (same: boolean) => void;
   setSelectedShippingOption: (option: ShippingOption) => void;
+  setShippingMethod: (method: any) => void;
   setPaymentMethod: (method: PaymentMethodType) => void;
   setCardDetails: (details: any) => void;
   setUpiId: (id: string) => void;
   setBankCode: (code: string) => void;
   setOrderNotes: (notes: string) => void;
+  setProcessing: (isProcessing: boolean) => void;
   processCheckout: (couponCode?: string) => Promise<Order>;
   resetCheckout: () => void;
 }
@@ -39,6 +42,7 @@ export const useCheckoutStore = create<CheckoutState>((set, get) => ({
   billingAddress: null,
   sameBillingAddress: true,
   selectedShippingOption: null,
+  shippingMethod: null,
   paymentMethod: 'credit_card',
   cardDetails: null,
   upiId: '',
@@ -52,12 +56,14 @@ export const useCheckoutStore = create<CheckoutState>((set, get) => ({
   setShippingAddress: (address) => set({ shippingAddress: address }),
   setBillingAddress: (address) => set({ billingAddress: address }),
   setSameBillingAddress: (same) => set({ sameBillingAddress: same }),
-  setSelectedShippingOption: (option) => set({ selectedShippingOption: option }),
+  setSelectedShippingOption: (option) => set({ selectedShippingOption: option, shippingMethod: option }),
+  setShippingMethod: (method) => set({ shippingMethod: method, selectedShippingOption: method }),
   setPaymentMethod: (method) => set({ paymentMethod: method }),
   setCardDetails: (details) => set({ cardDetails: details }),
   setUpiId: (id) => set({ upiId: id }),
   setBankCode: (code) => set({ bankCode: code }),
   setOrderNotes: (notes) => set({ orderNotes: notes }),
+  setProcessing: (isProcessing) => set({ isProcessing }),
 
   processCheckout: async (couponCode) => {
     const {

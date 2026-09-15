@@ -4,18 +4,14 @@ import { useSellerStore } from '../../store/sellerStore';
 import { MetricsCard } from '../../components/charts/MetricsCard';
 import { AreaChartCard } from '../../components/charts/AreaChartCard';
 import { BarChartCard } from '../../components/charts/BarChartCard';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
-import { PriceDisplay } from '../../components/ecommerce/PriceDisplay';
 import {
   DollarSign,
   ShoppingBag,
   Package,
   TrendingUp,
   Plus,
-  ArrowUpRight,
-  Clock,
   AlertTriangle,
   ChevronRight,
 } from 'lucide-react';

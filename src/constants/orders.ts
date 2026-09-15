@@ -84,6 +84,7 @@ export const MOCK_ORDERS: Order[] = [
     taxAmount: 119.76,
     shippingCost: 0.00,
     grandTotal: 1616.76,
+    total: 1616.76,
     payment: {
       method: 'credit_card',
       transactionId: 'TXN-998231-STRIPE',
@@ -199,6 +200,7 @@ export const MOCK_ORDERS: Order[] = [
     taxAmount: 14.40,
     shippingCost: 8.50,
     grandTotal: 202.90,
+    total: 202.90,
     payment: {
       method: 'upi',
       transactionId: 'UPI-REF-99120489',

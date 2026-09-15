@@ -4,19 +4,10 @@ import { useSellerStore } from '../../store/sellerStore';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
-import { Badge } from '../../components/common/Badge';
 import {
-  Upload,
   Plus,
   Trash2,
-  Check,
-  Sparkles,
-  Layers,
-  DollarSign,
-  Search,
   ArrowRight,
-  ArrowLeft,
-  Image as ImageIcon,
   CheckCircle2,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
@@ -28,17 +19,10 @@ interface VariantOption {
   values: string[];
 }
 
-interface GeneratedVariantRow {
-  sku: string;
-  name: string;
-  price: number;
-  stock: number;
-}
-
 export const ProductWizardPage: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { createProduct, updateProduct } = useSellerStore();
+  const { createProduct } = useSellerStore();
 
   const [currentStep, setCurrentStep] = useState<WizardStep>('basics');
 
@@ -60,8 +44,6 @@ export const ProductWizardPage: React.FC = () => {
     { name: 'Color', values: ['Space Gray', 'Matte Black', 'Silver'] },
     { name: 'Storage / Size', values: ['Standard', 'Pro 256GB'] },
   ]);
-  const [newOptionName, setNewOptionName] = useState('');
-  const [newOptionValue, setNewOptionValue] = useState('');
 
   // Step 4: Pricing & Inventory
   const [basePrice, setBasePrice] = useState(199.99);
@@ -93,18 +75,9 @@ export const ProductWizardPage: React.FC = () => {
     setImages(images.filter((_, i) => i !== index));
   };
 
-  const handleAddOptionValue = (optIndex: number, val: string) => {
-    if (!val.trim()) return;
-    const updated = [...variantOptions];
-    if (!updated[optIndex].values.includes(val.trim())) {
-      updated[optIndex].values.push(val.trim());
-      setVariantOptions(updated);
-    }
-  };
-
   const handleRemoveOptionValue = (optIndex: number, valIndex: number) => {
     const updated = [...variantOptions];
-    updated[optIndex].values.splice(valIndex, 1);
+    updated[optIndex].values = updated[optIndex].values.filter((_, i) => i !== valIndex);
     setVariantOptions(updated);
   };
 
@@ -113,13 +86,14 @@ export const ProductWizardPage: React.FC = () => {
     try {
       await createProduct({
         name: title || 'New Premium Audio System',
-        brand: brand || 'Aura Sound',
-        category: category || 'Electronics',
+        brand: { id: 'b_1', name: brand || 'Aura Sound', slug: (brand || 'aura').toLowerCase().replace(/\s+/g, '-') },
+        category: { id: 'c_1', name: category || 'Electronics', slug: (category || 'electronics').toLowerCase().replace(/\s+/g, '-') },
         description: description || 'High fidelity acoustic audio profile.',
         sku,
         price: basePrice,
         compareAtPrice: comparePrice,
         stock: stockQuantity,
+        totalInventory: stockQuantity,
         images: images.map((url, idx) => ({
           id: `img_${idx}`,
           url,
@@ -132,6 +106,7 @@ export const ProductWizardPage: React.FC = () => {
             sku: `${sku}-BLK`,
             name: 'Matte Black',
             price: basePrice,
+            inventoryQuantity: Math.floor(stockQuantity / 2),
             stock: Math.floor(stockQuantity / 2),
             attributes: { color: 'Black' },
           },
@@ -167,7 +142,7 @@ export const ProductWizardPage: React.FC = () => {
 
       {/* Step Tabs */}
       <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200 dark:border-slate-800">
-        {steps.map((s, idx) => {
+        {steps.map((s) => {
           const isActive = currentStep === s.id;
           return (
             <button

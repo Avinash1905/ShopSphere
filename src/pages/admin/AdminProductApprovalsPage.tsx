@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
 import { Product } from '../../types';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
-import { PriceDisplay } from '../../components/ecommerce/PriceDisplay';
 import {
-  PackageCheck,
   CheckCircle2,
   XCircle,
-  Eye,
-  Store,
-  Tag,
-  AlertTriangle,
 } from 'lucide-react';
 
 export const AdminProductApprovalsPage: React.FC = () => {
   const [pendingProducts, setPendingProducts] = useState<Product[]>([
     {
       id: 'prod_mod_1',
+      title: 'Cyberpunk OLED Smart Watch Ultra',
       name: 'Cyberpunk OLED Smart Watch Ultra',
-      brand: 'Nexus Tech',
-      category: 'Electronics',
-      categoryId: 'cat_electronics',
+      slug: 'cyberpunk-oled-smart-watch-ultra',
+      shortDescription: 'Futuristic smartwatch with blood oxygen monitoring.',
+      brand: { id: 'b_nexus', name: 'Nexus Tech', slug: 'nexus-tech' },
+      category: { id: 'cat_electronics', name: 'Electronics', slug: 'electronics' },
       price: 299.99,
       compareAtPrice: 349.99,
       stock: 50,
+      totalInventory: 50,
+      stockStatus: 'in_stock',
       sku: 'NEX-WTCH-01',
       sellerId: 'sel_3',
       sellerName: 'Nexus Tech Gadgets',
@@ -41,18 +38,23 @@ export const AdminProductApprovalsPage: React.FC = () => {
       ],
       description: 'Futuristic smartwatch with blood oxygen monitoring and titanium build.',
       tags: ['smartwatch', 'oled', 'titanium'],
-      specifications: { Screen: '1.92" OLED', Battery: '5 Days' },
+      variants: [],
+      specifications: [{ key: 'Screen', value: '1.92" OLED' }],
       createdAt: '2026-10-24T00:00:00.000Z',
       updatedAt: '2026-10-24T00:00:00.000Z',
     },
     {
       id: 'prod_mod_2',
+      title: 'Handcrafted Minimalist Walnut Coffee Table',
       name: 'Handcrafted Minimalist Walnut Coffee Table',
-      brand: 'Nordic Craft',
-      category: 'Home & Living',
-      categoryId: 'cat_home',
+      slug: 'handcrafted-minimalist-walnut-coffee-table',
+      shortDescription: 'Solid American walnut coffee table with organic curves.',
+      brand: { id: 'b_nordic', name: 'Nordic Craft', slug: 'nordic-craft' },
+      category: { id: 'cat_home', name: 'Home & Living', slug: 'home-living' },
       price: 450.00,
       stock: 12,
+      totalInventory: 12,
+      stockStatus: 'in_stock',
       sku: 'NC-TABL-02',
       sellerId: 'sel_2',
       sellerName: 'Nordic Craft Studio',
@@ -69,7 +71,8 @@ export const AdminProductApprovalsPage: React.FC = () => {
       ],
       description: 'Solid American walnut coffee table with organic curves and natural oil finish.',
       tags: ['furniture', 'walnut', 'minimalist'],
-      specifications: { Wood: 'Solid Walnut', Finish: 'Natural Tung Oil' },
+      variants: [],
+      specifications: [{ key: 'Wood', value: 'Solid Walnut' }],
       createdAt: '2026-10-24T00:00:00.000Z',
       updatedAt: '2026-10-24T00:00:00.000Z',
     },
@@ -112,22 +115,22 @@ export const AdminProductApprovalsPage: React.FC = () => {
               <div className="flex items-start gap-4">
                 <img
                   src={p.images[0]?.url}
-                  alt={p.name}
+                  alt={p.title}
                   className="w-20 h-20 object-cover rounded-xl border border-slate-700 shrink-0"
                 />
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-base font-bold text-white">{p.name}</h3>
+                    <h3 className="text-base font-bold text-white">{p.title}</h3>
                     <Badge variant="warning" size="sm">PENDING REVIEW</Badge>
                   </div>
                   <p className="text-xs text-slate-400">
-                    Seller: <span className="font-semibold text-slate-200">{p.sellerName}</span> • Category: {p.category} • SKU: {p.sku}
+                    Seller: <span className="font-semibold text-slate-200">{p.sellerName}</span> • Category: {p.category.name} • SKU: {p.sku}
                   </p>
                   <div className="flex items-center gap-3 pt-1">
                     <span className="font-mono font-bold text-white text-sm">
                       ${p.price.toFixed(2)}
                     </span>
-                    <span className="text-xs text-slate-500">Stock: {p.stock} units</span>
+                    <span className="text-xs text-slate-500">Stock: {p.stock || p.totalInventory} units</span>
                   </div>
                 </div>
               </div>

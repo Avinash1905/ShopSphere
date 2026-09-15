@@ -12,6 +12,7 @@ interface AuthState {
   register: (data: RegisterData) => Promise<void>;
   logout: () => Promise<void>;
   updateProfile: (data: Partial<User>) => Promise<void>;
+  updateUser: (data: Partial<User>) => Promise<void>;
   checkAuth: () => Promise<void>;
   switchUserRole: (role: 'customer' | 'seller' | 'admin') => void;
   clearError: () => void;
@@ -72,6 +73,17 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 
   updateProfile: async (data) => {
+    set({ isLoading: true, error: null });
+    try {
+      const res = await authService.updateProfile(data);
+      set({ user: res.data, isLoading: false });
+    } catch (err: any) {
+      set({ error: err.message || 'Profile update failed', isLoading: false });
+      throw err;
+    }
+  },
+
+  updateUser: async (data) => {
     set({ isLoading: true, error: null });
     try {
       const res = await authService.updateProfile(data);

@@ -17,7 +17,6 @@ import {
   CheckCircle2,
   Calendar,
   Mail,
-  Phone,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 

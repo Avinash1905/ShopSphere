@@ -2,15 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useOrderStore } from '../../store/orderStore';
 import { Button } from '../../components/common/Button';
-import { PriceDisplay } from '../../components/ecommerce/PriceDisplay';
 import {
   Printer,
   Download,
-  Share2,
   ArrowLeft,
   ShoppingBag,
   ShieldCheck,
-  CheckCircle2,
 } from 'lucide-react';
 
 export const InvoicePage: React.FC = () => {
@@ -186,10 +183,10 @@ export const InvoicePage: React.FC = () => {
                     <p className="text-[10px] text-slate-400 mt-0.5">Sold by: {item.product.sellerName}</p>
                   </td>
                   <td className="py-3 font-mono text-slate-500">{item.product.sku || 'N/A'}</td>
-                  <td className="py-3 text-right font-mono">${(item.selectedVariant?.price || item.product.price || item.unitPrice || 0).toFixed(2)}</td>
+                  <td className="py-3 text-right font-mono">${(item.unitPrice || 0).toFixed(2)}</td>
                   <td className="py-3 text-center font-bold">{item.quantity}</td>
                   <td className="py-3 text-right font-bold font-mono">
-                    ${((item.selectedVariant?.price || item.product.price || item.unitPrice || 0) * item.quantity).toFixed(2)}
+                    ${((item.unitPrice || 0) * item.quantity).toFixed(2)}
                   </td>
                 </tr>
               ))}
@@ -202,25 +199,25 @@ export const InvoicePage: React.FC = () => {
           <div className="w-64 space-y-2 text-xs">
             <div className="flex justify-between text-slate-600">
               <span>Subtotal</span>
-              <span className="font-mono">${order.subtotal.toFixed(2)}</span>
+              <span className="font-mono">${(order.subtotal || 0).toFixed(2)}</span>
             </div>
-            {order.discount > 0 && (
+            {(order.discount || 0) > 0 && (
               <div className="flex justify-between text-emerald-600 font-medium">
                 <span>Discount</span>
-                <span className="font-mono">-${order.discount.toFixed(2)}</span>
+                <span className="font-mono">-${(order.discount || 0).toFixed(2)}</span>
               </div>
             )}
             <div className="flex justify-between text-slate-600">
               <span>Shipping & Handling</span>
-              <span className="font-mono">${order.shippingFee.toFixed(2)}</span>
+              <span className="font-mono">${(order.shippingFee ?? 0).toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-slate-600">
               <span>Estimated Sales Tax (8%)</span>
-              <span className="font-mono">${order.tax.toFixed(2)}</span>
+              <span className="font-mono">${(order.tax ?? 0).toFixed(2)}</span>
             </div>
             <div className="border-t-2 border-slate-900 pt-2 flex justify-between font-black text-sm text-slate-900">
               <span>Grand Total</span>
-              <span className="font-mono text-base">${order.total.toFixed(2)}</span>
+              <span className="font-mono text-base">${(order.total || 0).toFixed(2)}</span>
             </div>
           </div>
         </div>

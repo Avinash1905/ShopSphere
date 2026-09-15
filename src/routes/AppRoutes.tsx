@@ -7,7 +7,6 @@ import { SellerLayout } from '../layouts/SellerLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
 
 // Route Guards
-import { ProtectedRoute } from './ProtectedRoute';
 import { RoleGuard } from './RoleGuard';
 
 // Customer & Public Pages

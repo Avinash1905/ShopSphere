@@ -8,7 +8,6 @@ import { Modal } from '../../components/ui/Modal';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { RatingStars } from '../../components/ui/RatingStars';
-import { Star } from 'lucide-react';
 
 export interface WriteReviewModalProps {
   isOpen: boolean;

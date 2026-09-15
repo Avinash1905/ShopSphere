@@ -1,9 +1,19 @@
 import { create } from 'zustand';
-import { CartItem, CartSummary, SavedForLaterItem } from '../types';
+import { CartItem, CartSummary, SavedForLaterItem, Product, ProductVariant } from '../types';
 import { cartService, couponService } from '../services';
+
+export interface CartObject {
+  items: CartItem[];
+  subtotal: number;
+  discount: number;
+  tax: number;
+  total: number;
+  coupon?: any;
+}
 
 interface CartState {
   items: CartItem[];
+  cart: CartObject | null;
   summary: CartSummary;
   savedItems: SavedForLaterItem[];
   isCartDrawerOpen: boolean;
@@ -12,6 +22,7 @@ interface CartState {
   error: string | null;
   fetchCart: () => Promise<void>;
   addItem: (productId: string, variantId?: string, quantity?: number) => Promise<void>;
+  addToCart: (product: Product, quantity?: number, variant?: ProductVariant) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
   removeItem: (itemId: string) => Promise<void>;
   clearCart: () => Promise<void>;
@@ -40,6 +51,13 @@ const DEFAULT_SUMMARY: CartSummary = {
 
 export const useCartStore = create<CartState>((set, get) => ({
   items: [],
+  cart: {
+    items: [],
+    subtotal: 0,
+    discount: 0,
+    tax: 0,
+    total: 0,
+  },
   summary: DEFAULT_SUMMARY,
   savedItems: [],
   isCartDrawerOpen: false,
@@ -51,9 +69,18 @@ export const useCartStore = create<CartState>((set, get) => ({
     set({ isLoading: true });
     try {
       const res = await cartService.getCart();
+      const items = res.data.items || [];
+      const summary = res.data.summary || DEFAULT_SUMMARY;
       set({
-        items: res.data.items,
-        summary: res.data.summary,
+        items,
+        summary,
+        cart: {
+          items,
+          subtotal: summary.subtotal,
+          discount: summary.discountAmount,
+          tax: summary.taxAmount,
+          total: summary.grandTotal,
+        },
         isLoading: false,
       });
     } catch (err: any) {
@@ -71,6 +98,10 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ error: err.message, isLoading: false });
       throw err;
     }
+  },
+
+  addToCart: async (product, quantity = 1, variant) => {
+    await get().addItem(product.id, variant?.id, quantity);
   },
 
   updateQuantity: async (itemId, quantity) => {
@@ -94,7 +125,12 @@ export const useCartStore = create<CartState>((set, get) => ({
   clearCart: async () => {
     try {
       await cartService.clearCart();
-      set({ items: [], summary: DEFAULT_SUMMARY, appliedCouponCode: null });
+      set({
+        items: [],
+        cart: { items: [], subtotal: 0, discount: 0, tax: 0, total: 0 },
+        summary: DEFAULT_SUMMARY,
+        appliedCouponCode: null,
+      });
     } catch (err: any) {
       set({ error: err.message });
     }

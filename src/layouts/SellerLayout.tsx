@@ -15,8 +15,6 @@ import {
   DollarSign,
   Store,
   Settings,
-  Bell,
-  Search,
   Menu,
   X,
   LogOut,
