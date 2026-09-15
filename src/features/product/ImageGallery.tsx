@@ -31,9 +31,12 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, title }) => 
         onMouseMove={handleMouseMove}
       >
         <img
-          src={activeImage?.url}
+          src={activeImage?.url || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80'}
           alt={activeImage?.altText || title}
           className="h-full w-full object-cover transition-transform duration-300"
+          onError={(e) => {
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80';
+          }}
         />
 
         {isZoomed && (

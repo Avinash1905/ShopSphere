@@ -75,10 +75,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         className="relative block aspect-square w-full overflow-hidden bg-surface-100"
       >
         <img
-          src={primaryImage?.url}
+          src={primaryImage?.url || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80'}
           alt={primaryImage?.altText || product.title}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80';
+          }}
         />
         {secondaryImage && secondaryImage.url !== primaryImage?.url && (
           <img
@@ -86,6 +89,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             alt={secondaryImage.altText || product.title}
             className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             loading="lazy"
+            onError={(e) => {
+              e.currentTarget.src = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80';
+            }}
           />
         )}
 
