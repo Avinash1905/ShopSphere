@@ -22,3 +22,5 @@ export * from './zero_trust_device_fingerprint.js';
 export * from './pci_dss_tokenization_vault.js';
 
 export * from './customs_harmonized_tariff_engine.js';
+
+export * from './anti_tamper_audit_seal.js';

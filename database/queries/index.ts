@@ -20,3 +20,6 @@ export * from './query_ast_rewriter.js';
 
 export * from './wms_pick_pack_routing_query.js';
 export * from './cycle_count_variance_query.js';
+
+export * from './balance_sheet_income_statement_query.js';
+export * from './fx_revaluation_unrealized_gain_loss_query.js';

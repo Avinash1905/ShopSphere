@@ -45,3 +45,6 @@ export * from './multi_tenant_repository_base.js';
 export * from './wms_bin_inventory_repository.js';
 export * from './asn_inbound_shipment_repository.js';
 export * from './stock_transfer_repository.js';
+
+export * from './general_ledger_repository.js';
+export * from './seller_tax_1099k_repository.js';

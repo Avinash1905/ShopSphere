@@ -23,6 +23,7 @@ import './integration/audit_advanced.test.js';
 import './integration/testing_advanced.test.js';
 import './integration/testing_resilience_deep_dive.test.js';
 import './integration/wms_logistics_deep_dive.test.js';
+import './integration/general_ledger_deep_dive.test.js';
 
 
 // Import E2E Tests

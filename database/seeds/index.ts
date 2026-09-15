@@ -37,6 +37,7 @@ import { ExtendedEngagementSeeder } from './extended_engagement_seeder.js';
 import { ExtendedNotificationSeeder } from './extended_notification_seeder.js';
 import { ExtendedAuditSeeder } from './extended_audit_seeder.js';
 import { ExtendedWMSSeeder } from './16_extended_wms_seeder.js';
+import { GeneralLedgerSeeder } from './17_general_ledger_seeder.js';
 
 export function createDefaultSeedRunner(dbAdapter: any, seed: number = 42): SeedRunner {
   const runner = new SeedRunner(dbAdapter, seed);
@@ -56,5 +57,8 @@ export function createDefaultSeedRunner(dbAdapter: any, seed: number = 42): Seed
   runner.register(ExtendedNotificationSeeder);
   runner.register(ExtendedAuditSeeder);
   runner.register(ExtendedWMSSeeder);
+  runner.register(GeneralLedgerSeeder);
   return runner;
 }
+
+export * from './17_general_ledger_seeder.js';
