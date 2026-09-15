@@ -23,3 +23,6 @@ export * from './cycle_count_variance_query.js';
 
 export * from './balance_sheet_income_statement_query.js';
 export * from './fx_revaluation_unrealized_gain_loss_query.js';
+
+export * from './b2b_tiered_pricing_evaluator_query.js';
+export * from './b2b_dunning_aging_receivables_query.js';

@@ -48,3 +48,6 @@ export * from './stock_transfer_repository.js';
 
 export * from './general_ledger_repository.js';
 export * from './seller_tax_1099k_repository.js';
+
+export * from './b2b_corporate_account_repository.js';
+export * from './b2b_quote_rfq_repository.js';

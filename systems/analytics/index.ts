@@ -28,3 +28,5 @@ export * from './wms_fulfillment_efficiency_analytics.js';
 export * from './carrier_shipping_rate_engine.js';
 
 export * from './financial_ratio_analyzer.js';
+
+export * from './b2b_wholesale_margin_optimizer.js';

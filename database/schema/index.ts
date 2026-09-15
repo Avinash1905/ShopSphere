@@ -1,3 +1,4 @@
+export * from './b2b_wholesale.schema.js';
 export * from './general_ledger.schema.js';
 export * from './wms_warehouse_extended.schema.js';
 export * from './types.js';

@@ -24,3 +24,5 @@ export * from './pci_dss_tokenization_vault.js';
 export * from './customs_harmonized_tariff_engine.js';
 
 export * from './anti_tamper_audit_seal.js';
+
+export * from './b2b_tax_exemption_validator.js';
