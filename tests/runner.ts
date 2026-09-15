@@ -5,6 +5,7 @@ import './integration/database_integration.test.js';
 import './integration/schema_extended.test.js';
 import './integration/schema_comparator.test.js';
 import './integration/migration_seed_extended.test.js';
+import './integration/query_extended.test.js';
 import './integration/repository_integration.test.js';
 import './integration/repository_extended.test.js';
 import './integration/repository_advanced.test.js';
