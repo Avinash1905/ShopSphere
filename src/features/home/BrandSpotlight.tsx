@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useProductStore } from '../../store/productStore';
-import { ShieldCheck, ArrowRight } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 export const BrandSpotlight: React.FC = () => {
   const { brands } = useProductStore();

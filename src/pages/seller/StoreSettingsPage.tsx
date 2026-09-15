@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
-import { Badge } from '../../components/common/Badge';
-import { Store, Camera, CheckCircle2, ShieldCheck, Mail, Phone, MapPin } from 'lucide-react';
+import { Store, Camera, CheckCircle2, ShieldCheck, Mail, Phone } from 'lucide-react';
 
 export const StoreSettingsPage: React.FC = () => {
   const [storeName, setStoreName] = useState('Aura Sound Technologies');
   const [tagline, setTagline] = useState('Audiophile-Grade Acoustic Engineering');
   const [email, setEmail] = useState('support@aurasound.com');
   const [phone, setPhone] = useState('+1 (555) 492-1084');
-  const [logoUrl, setLogoUrl] = useState('https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=200');
+  const [logoUrl] = useState('https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=200');
   const [bannerUrl, setBannerUrl] = useState('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200');
   const [returnPolicy, setReturnPolicy] = useState('30-day no questions asked money-back guarantee. Item must be in original condition with box.');
   const [isSaved, setIsSaved] = useState(false);
@@ -55,7 +54,7 @@ export const StoreSettingsPage: React.FC = () => {
             </div>
             <Input
               value={bannerUrl}
-              onChange={(e) => setBannerUrl(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBannerUrl(e.target.value)}
               placeholder="Banner Image URL"
               className="mt-2 text-xs"
             />
@@ -69,24 +68,18 @@ export const StoreSettingsPage: React.FC = () => {
                 alt="Store Logo"
                 className="w-24 h-24 rounded-2xl object-cover border-2 border-indigo-600/20 shadow-md"
               />
-              <button
-                type="button"
-                className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity flex items-center justify-center text-white"
-              >
-                <Camera className="w-5 h-5" />
-              </button>
             </div>
 
             <div className="flex-1 space-y-4 w-full">
               <Input
                 label="Store Public Name"
                 value={storeName}
-                onChange={(e) => setStoreName(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStoreName(e.target.value)}
               />
               <Input
                 label="Store Slogan / Tagline"
                 value={tagline}
-                onChange={(e) => setTagline(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTagline(e.target.value)}
               />
             </div>
           </div>
@@ -103,13 +96,13 @@ export const StoreSettingsPage: React.FC = () => {
               label="Customer Support Email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
               leftIcon={<Mail className="w-4 h-4 text-slate-400" />}
             />
             <Input
               label="Business Hotline"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
               leftIcon={<Phone className="w-4 h-4 text-slate-400" />}
             />
           </div>
@@ -121,7 +114,7 @@ export const StoreSettingsPage: React.FC = () => {
             <textarea
               rows={3}
               value={returnPolicy}
-              onChange={(e) => setReturnPolicy(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReturnPolicy(e.target.value)}
               className="w-full p-3 text-sm border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
             />
           </div>

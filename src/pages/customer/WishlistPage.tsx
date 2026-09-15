@@ -6,7 +6,7 @@ import { useUiStore } from '../../store/uiStore';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { PriceDisplay } from '../../components/ui/PriceDisplay';
 import { RatingStars } from '../../components/ui/RatingStars';
-import { Heart, ShoppingBag, Trash2, ArrowRight } from 'lucide-react';
+import { Heart, ShoppingBag, Trash2 } from 'lucide-react';
 
 export const WishlistPage: React.FC = () => {
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlistStore();

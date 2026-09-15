@@ -71,12 +71,17 @@ export class MockOrderService implements IOrderService {
       status: 'payment_confirmed',
       subtotal: summary.subtotal,
       discountAmount: summary.discountAmount,
+      discount: summary.discountAmount,
       couponCode: params.couponCode,
       taxAmount: summary.taxAmount,
+      tax: summary.taxAmount,
       shippingCost: summary.estimatedShipping,
+      shippingFee: summary.estimatedShipping,
       grandTotal: summary.grandTotal,
+      total: summary.grandTotal,
       payment: params.paymentDetails,
       notes: params.notes,
+      createdAt: new Date().toISOString(),
       trackingEvents: [
         {
           id: `trk-${Date.now()}-1`,
@@ -87,7 +92,6 @@ export class MockOrderService implements IOrderService {
           location: `${shippingAddress.city}, ${shippingAddress.state}`,
         },
       ],
-      createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
 
@@ -158,7 +162,7 @@ export class MockOrderService implements IOrderService {
   async getOrderByNumber(orderNumber: string): Promise<ApiResponse<Order>> {
     await mockStorage.delay(150);
     const orders = mockStorage.getOrders();
-    const order = orders.find((o) => o.orderNumber.toUpperCase() === orderNumber.toUpperCase());
+    const order = orders.find((o) => (o.orderNumber || o.id).toUpperCase() === orderNumber.toUpperCase());
     if (!order) throw new Error('Order not found');
     return { success: true, data: order };
   }
@@ -177,6 +181,7 @@ export class MockOrderService implements IOrderService {
     order.cancelReason = reason;
     order.cancelledAt = new Date().toISOString();
     order.updatedAt = new Date().toISOString();
+    order.trackingEvents = order.trackingEvents || [];
     order.trackingEvents.push({
       id: `trk-${Date.now()}`,
       timestamp: new Date().toISOString(),
@@ -229,7 +234,7 @@ export class MockOrderService implements IOrderService {
     if (!order) throw new Error('Order not found');
 
     const invoice: Invoice = {
-      invoiceNumber: `INV-${order.orderNumber.replace('ORD-', '')}`,
+      invoiceNumber: `INV-${(order.orderNumber || order.id).replace('ORD-', '')}`,
       issueDate: order.createdAt,
       dueDate: order.createdAt,
       order,

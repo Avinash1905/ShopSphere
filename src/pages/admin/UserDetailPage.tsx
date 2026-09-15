@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAdminStore } from '../../store/adminStore';
-import { User } from '../../types';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { Avatar } from '../../components/common/Avatar';
 import {
   ArrowLeft,
-  User as UserIcon,
   Mail,
   Phone,
   Shield,
   Calendar,
-  ShoppingBag,
   Clock,
-  MapPin,
-  CheckCircle2,
 } from 'lucide-react';
 
 export const UserDetailPage: React.FC = () => {

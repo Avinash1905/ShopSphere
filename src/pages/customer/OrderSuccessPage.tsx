@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useOrderStore } from '../../store/orderStore';
 import { Button } from '../../components/common/Button';
 import { Card } from '../../components/common/Card';
@@ -10,7 +10,6 @@ import {
   Truck,
   FileText,
   ShoppingBag,
-  ArrowRight,
   Mail,
   Calendar,
   Clock,
@@ -155,13 +154,13 @@ export const OrderSuccessPage: React.FC = () => {
               <div>
                 <span className="text-xs text-slate-400 block">Method:</span>
                 <span className="font-medium text-slate-900 dark:text-white capitalize">
-                  {order.paymentMethod?.type} (•••• {order.paymentMethod?.details?.last4 || '4242'})
+                  {((order as any).paymentMethod?.type || (order as any).payment?.method || (order as any).paymentMethod || 'Credit Card')} (•••• {((order as any).paymentMethod?.details?.last4 || '4242')})
                 </span>
               </div>
               <div>
                 <span className="text-xs text-slate-400 block">Delivery Option:</span>
                 <span className="font-medium text-slate-900 dark:text-white">
-                  {order.shippingMethod?.name} ({order.shippingMethod?.estimatedDays})
+                  {order.shippingMethod?.name || 'Standard Ground'} ({order.shippingMethod?.estimatedDays || '3-5 days'})
                 </span>
               </div>
               <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">

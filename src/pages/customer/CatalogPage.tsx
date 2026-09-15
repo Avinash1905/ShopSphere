@@ -19,7 +19,6 @@ export const CatalogPage: React.FC = () => {
     filters,
     viewMode,
     isLoading,
-    fetchProducts,
     setFilters,
     setViewMode,
   } = useProductStore();

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Switch } from '../../components/common/Switch';
-import { Badge } from '../../components/common/Badge';
-import { Sliders, Shield, DollarSign, Server, CheckCircle2, Lock } from 'lucide-react';
+import { DollarSign, Server, CheckCircle2 } from 'lucide-react';
 
 export const PlatformSettingsPage: React.FC = () => {
   const [commissionRate, setCommissionRate] = useState(10);

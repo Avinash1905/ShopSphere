@@ -10,12 +10,10 @@ const gamingCategory = MOCK_CATEGORIES[5];
 
 const appleBrand = MOCK_BRANDS[0];
 const sonyBrand = MOCK_BRANDS[1];
-const samsungBrand = MOCK_BRANDS[2];
 const nikeBrand = MOCK_BRANDS[3];
 const boseBrand = MOCK_BRANDS[4];
 const dysonBrand = MOCK_BRANDS[5];
 const logitechBrand = MOCK_BRANDS[6];
-const rolexBrand = MOCK_BRANDS[7];
 
 export const MOCK_PRODUCTS: Product[] = [
   {

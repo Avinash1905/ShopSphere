@@ -8,10 +8,13 @@ export interface User {
   id: string;
   email: string;
   fullName: string;
+  name?: string;
   avatarUrl?: string;
+  avatar?: string;
   role: UserRole;
   status: UserStatus;
   phoneNumber?: string;
+  phone?: string;
   createdAt: string;
   updatedAt: string;
   emailVerified: boolean;

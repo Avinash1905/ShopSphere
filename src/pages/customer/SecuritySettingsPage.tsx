@@ -4,7 +4,7 @@ import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
 import { Switch } from '../../components/common/Switch';
-import { Shield, KeyRound, Smartphone, Laptop, CheckCircle2, AlertCircle } from 'lucide-react';
+import { KeyRound, Smartphone, Laptop, CheckCircle2 } from 'lucide-react';
 
 export const SecuritySettingsPage: React.FC = () => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -61,21 +61,21 @@ export const SecuritySettingsPage: React.FC = () => {
             type="password"
             placeholder="••••••••"
             value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentPassword(e.target.value)}
           />
           <Input
             label="New Password"
             type="password"
             placeholder="••••••••"
             value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewPassword(e.target.value)}
           />
           <Input
             label="Confirm New Password"
             type="password"
             placeholder="••••••••"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
           />
 
           {isSuccess && (

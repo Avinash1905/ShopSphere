@@ -15,12 +15,7 @@ import {
   FileText,
   RotateCcw,
   ShoppingBag,
-  ExternalLink,
   ChevronRight,
-  Clock,
-  CheckCircle2,
-  XCircle,
-  AlertCircle,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
@@ -46,9 +41,10 @@ export const OrderHistoryPage: React.FC = () => {
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
       order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.items.some((item) =>
-        item.product.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+      order.items.some((item) => {
+        const title = item.product?.title || item.product?.name || item.productTitle || '';
+        return title.toLowerCase().includes(searchQuery.toLowerCase());
+      });
 
     if (!matchesSearch) return false;
 
@@ -85,7 +81,9 @@ export const OrderHistoryPage: React.FC = () => {
 
   const handleReorder = (order: Order) => {
     order.items.forEach((item) => {
-      addToCart(item.product, item.quantity, item.selectedVariant);
+      if (item.product) {
+        addToCart(item.product, item.quantity, item.selectedVariant || item.variant);
+      }
     });
     navigate('/cart');
   };
@@ -131,7 +129,7 @@ export const OrderHistoryPage: React.FC = () => {
             <Input
               placeholder="Search by order ID or item..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
               leftIcon={<Search className="w-4 h-4 text-slate-400" />}
             />
           </div>
@@ -199,44 +197,51 @@ export const OrderHistoryPage: React.FC = () => {
 
                 {/* Items in Order */}
                 <div className="p-6 divide-y divide-slate-100 dark:divide-slate-800">
-                  {order.items.map((item) => (
-                    <div key={item.id} className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                      <div className="flex items-center gap-4">
-                        <img
-                          src={item.product.images[0]?.url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=120'}
-                          alt={item.product.name}
-                          className="w-16 h-16 object-cover rounded-xl border border-slate-200 dark:border-slate-700 shrink-0"
-                        />
-                        <div>
-                          <Link
-                            to={`/product/${item.product.id}`}
-                            className="text-sm font-bold text-slate-900 dark:text-white hover:text-indigo-600 transition-colors line-clamp-1"
-                          >
-                            {item.product.name}
-                          </Link>
-                          <p className="text-xs text-slate-500 mt-0.5">
-                            Qty: <span className="font-medium text-slate-700 dark:text-slate-300">{item.quantity}</span> • Seller: {item.product.sellerName}
-                          </p>
-                          <PriceDisplay
-                            price={(item.selectedVariant?.price || item.product.price) * item.quantity}
-                            size="sm"
-                            className="mt-1"
+                  {order.items.map((item) => {
+                    const title = item.product?.title || item.product?.name || item.productTitle || 'Product';
+                    const image = item.product?.images?.[0]?.url || item.productImage || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=120';
+                    const seller = item.product?.sellerName || item.sellerName || 'ShopSphere Vendor';
+                    const unitPrice = item.selectedVariant?.price || item.variant?.price || item.product?.price || item.unitPrice || 0;
+
+                    return (
+                      <div key={item.id} className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                          <img
+                            src={image}
+                            alt={title}
+                            className="w-16 h-16 object-cover rounded-xl border border-slate-200 dark:border-slate-700 shrink-0"
                           />
+                          <div>
+                            <Link
+                              to={item.product?.id ? `/product/${item.product.id}` : '#'}
+                              className="text-sm font-bold text-slate-900 dark:text-white hover:text-indigo-600 transition-colors line-clamp-1"
+                            >
+                              {title}
+                            </Link>
+                            <p className="text-xs text-slate-500 mt-0.5">
+                              Qty: <span className="font-medium text-slate-700 dark:text-slate-300">{item.quantity}</span> • Seller: {seller}
+                            </p>
+                            <PriceDisplay
+                              price={unitPrice * item.quantity}
+                              size="sm"
+                              className="mt-1"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => navigate(item.product?.id ? `/product/${item.product.id}#reviews` : '#')}
+                            className="text-xs"
+                          >
+                            Write Review
+                          </Button>
                         </div>
                       </div>
-
-                      <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => navigate(`/product/${item.product.id}#reviews`)}
-                          className="text-xs"
-                        >
-                          Write Review
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* Order Footer Actions */}

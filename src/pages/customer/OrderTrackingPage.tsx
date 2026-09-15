@@ -8,14 +8,11 @@ import {
   CheckCircle2,
   Clock,
   Truck,
-  Package,
   MapPin,
-  Phone,
   ArrowLeft,
   Navigation,
   ExternalLink,
   ShieldCheck,
-  AlertCircle,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
@@ -30,7 +27,7 @@ interface TrackingEvent {
 
 export const OrderTrackingPage: React.FC = () => {
   const { orderId } = useParams<{ orderId: string }>();
-  const { currentOrder, getOrderById } = useOrderStore();
+  const { getOrderById } = useOrderStore();
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {

@@ -39,12 +39,13 @@ export class MockCouponService implements ICouponService {
       };
     }
 
-    if (cartTotal < coupon.minimumOrderAmount) {
+    const minOrder = coupon.minimumOrderAmount ?? coupon.minPurchase ?? 0;
+    if (cartTotal < minOrder) {
       return {
         success: false,
         data: {
           isValid: false,
-          errorMessage: `Minimum order amount of $${coupon.minimumOrderAmount} required to use this voucher`,
+          errorMessage: `Minimum order amount of $${minOrder} required to use this voucher`,
         },
       };
     }
@@ -63,14 +64,18 @@ export class MockCouponService implements ICouponService {
     }
 
     let discountAmount = 0;
-    if (coupon.discountType === 'percentage') {
-      const raw = (cartTotal * coupon.discountValue) / 100;
-      discountAmount = coupon.maximumDiscountAmount
-        ? Math.min(raw, coupon.maximumDiscountAmount)
+    const discountType = coupon.discountType || coupon.type || 'percentage';
+    const discountVal = coupon.discountValue ?? coupon.value ?? 0;
+    const maxDiscount = coupon.maximumDiscountAmount ?? coupon.maxDiscount;
+
+    if (discountType === 'percentage') {
+      const raw = (cartTotal * discountVal) / 100;
+      discountAmount = maxDiscount
+        ? Math.min(raw, maxDiscount)
         : raw;
-    } else if (coupon.discountType === 'fixed_amount') {
-      discountAmount = Math.min(coupon.discountValue, cartTotal);
-    } else if (coupon.discountType === 'free_shipping') {
+    } else if (discountType === 'fixed_amount' || discountType === 'fixed') {
+      discountAmount = Math.min(discountVal, cartTotal);
+    } else if (discountType === 'free_shipping') {
       discountAmount = 14.99;
     }
 

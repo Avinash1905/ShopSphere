@@ -6,17 +6,11 @@ import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
-import { PriceDisplay } from '../../components/ecommerce/PriceDisplay';
 import { OrderFulfillmentModal } from './OrderFulfillmentModal';
 import {
   Search,
   Truck,
   FileText,
-  Printer,
-  ChevronRight,
-  Filter,
-  Package,
-  Calendar,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
@@ -43,7 +37,7 @@ export const SellerOrdersPage: React.FC = () => {
     return ord.status === activeStatus && matchesSearch;
   });
 
-  const handleFulfillSuccess = (orderId: string, carrier: string, trackingNumber: string) => {
+  const handleFulfillSuccess = (orderId: string) => {
     updateOrderStatus(orderId, 'shipped');
   };
 
@@ -107,7 +101,7 @@ export const SellerOrdersPage: React.FC = () => {
           <Input
             placeholder="Search by ID or customer..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
             leftIcon={<Search className="w-4 h-4 text-slate-400" />}
           />
         </div>

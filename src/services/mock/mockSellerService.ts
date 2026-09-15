@@ -164,6 +164,7 @@ export class MockSellerService implements ISellerService {
     order.shippingCarrier = carrier;
     order.shippingTrackingNumber = trackingNumber;
     order.updatedAt = new Date().toISOString();
+    order.trackingEvents = order.trackingEvents || [];
     order.trackingEvents.push({
       id: `trk-${Date.now()}`,
       timestamp: new Date().toISOString(),

@@ -37,7 +37,6 @@ export const RatingBreakdownCard: React.FC<RatingBreakdownCardProps> = ({ produc
       {/* Breakdown Progress Bars */}
       <div className="flex-1 w-full space-y-2">
         {[5, 4, 3, 2, 1].map((stars) => {
-          const count = breakdown.counts[stars as 1 | 2 | 3 | 4 | 5] || 0;
           const percentage = breakdown.percentages[stars as 1 | 2 | 3 | 4 | 5] || 0;
 
           return (

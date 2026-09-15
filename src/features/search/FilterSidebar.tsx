@@ -1,7 +1,6 @@
 import React from 'react';
 import { useProductStore } from '../../store/productStore';
 import { Checkbox } from '../../components/ui/Checkbox';
-import { RatingStars } from '../../components/ui/RatingStars';
 import { RotateCcw, Filter, Star } from 'lucide-react';
 
 export interface FilterSidebarProps {

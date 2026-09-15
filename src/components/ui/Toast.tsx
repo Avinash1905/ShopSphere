@@ -12,7 +12,8 @@ export interface ToastMessage {
 
 export interface ToastProps {
   toasts: ToastMessage[];
-  onDismiss: (id: string) => void;
+  onDismiss?: (id: string) => void;
+  onClose?: (id: string) => void;
 }
 
 export const ToastItem: React.FC<{ toast: ToastMessage; onDismiss: (id: string) => void }> = ({
@@ -62,14 +63,15 @@ export const ToastItem: React.FC<{ toast: ToastMessage; onDismiss: (id: string) 
   );
 };
 
-export const ToastContainer: React.FC<ToastProps> = ({ toasts, onDismiss }) => {
+export const ToastContainer: React.FC<ToastProps> = ({ toasts, onDismiss, onClose }) => {
+  const handleDismiss = onDismiss || onClose || (() => {});
   return (
     <div
       aria-live="assertive"
       className="pointer-events-none fixed inset-0 z-50 flex flex-col items-end gap-2 px-4 py-6 sm:p-6"
     >
       {toasts.map((toast) => (
-        <ToastItem key={toast.id} toast={toast} onDismiss={onDismiss} />
+        <ToastItem key={toast.id} toast={toast} onDismiss={handleDismiss} />
       ))}
     </div>
   );

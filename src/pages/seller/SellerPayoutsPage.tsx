@@ -5,12 +5,10 @@ import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import {
-  DollarSign,
   ArrowUpRight,
   Building2,
   Clock,
   CheckCircle2,
-  Calendar,
   Download,
 } from 'lucide-react';
 
@@ -196,7 +194,7 @@ export const SellerPayoutsPage: React.FC = () => {
             label="Withdrawal Amount ($)"
             type="number"
             value={withdrawAmount}
-            onChange={(e) => setWithdrawAmount(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWithdrawAmount(e.target.value)}
           />
 
           {isSuccess && (

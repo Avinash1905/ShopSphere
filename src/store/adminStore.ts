@@ -27,6 +27,7 @@ interface AdminState {
   fetchPlatformOverview: () => Promise<void>;
   fetchUsers: (page?: number, role?: string, status?: string) => Promise<void>;
   updateUserStatus: (userId: string, status: 'active' | 'suspended' | 'banned', reason: string) => Promise<void>;
+  updateUserRole: (userId: string, role: 'customer' | 'seller' | 'admin') => Promise<void>;
   fetchSellers: (page?: number, status?: string) => Promise<void>;
   moderateSeller: (sellerId: string, action: 'approve' | 'reject' | 'suspend', commission?: number, notes?: string) => Promise<void>;
   fetchPendingProducts: (page?: number) => Promise<void>;
@@ -80,6 +81,16 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     try {
       await adminService.updateUserStatus(userId, status, reason);
       await get().fetchUsers();
+    } catch (err: any) {
+      set({ error: err.message });
+      throw err;
+    }
+  },
+
+  updateUserRole: async (userId, role) => {
+    try {
+      const users = get().users.map((u) => (u.id === userId ? { ...u, role } : u));
+      set({ users });
     } catch (err: any) {
       set({ error: err.message });
       throw err;

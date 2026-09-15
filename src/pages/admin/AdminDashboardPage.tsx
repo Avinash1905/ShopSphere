@@ -4,30 +4,24 @@ import { useAdminStore } from '../../store/adminStore';
 import { MetricsCard } from '../../components/charts/MetricsCard';
 import { AreaChartCard } from '../../components/charts/AreaChartCard';
 import { BarChartCard } from '../../components/charts/BarChartCard';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
-import { Badge } from '../../components/common/Badge';
 import {
   DollarSign,
   Users,
   Store,
   ShieldCheck,
   TrendingUp,
-  Activity,
-  AlertTriangle,
   ChevronRight,
   Server,
-  Zap,
 } from 'lucide-react';
 
 export const AdminDashboardPage: React.FC = () => {
   const navigate = useNavigate();
-  const { analytics, fetchPlatformAnalytics, pendingSellers, fetchPendingSellers } = useAdminStore();
+  const { fetchPlatformOverview } = useAdminStore();
 
   useEffect(() => {
-    fetchPlatformAnalytics();
-    fetchPendingSellers();
-  }, [fetchPlatformAnalytics, fetchPendingSellers]);
+    fetchPlatformOverview();
+  }, [fetchPlatformOverview]);
 
   const gmvData = [
     { name: 'Jan', value: 450000 },

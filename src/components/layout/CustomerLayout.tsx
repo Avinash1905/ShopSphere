@@ -7,7 +7,6 @@ import { MobileNav } from './MobileNav';
 import { Drawer } from '../ui/Drawer';
 import { ToastContainer } from '../ui/Toast';
 import { useCartStore } from '../../store/cartStore';
-import { useWishlistStore } from '../../store/wishlistStore';
 import { useProductStore } from '../../store/productStore';
 import { useNotificationStore } from '../../store/notificationStore';
 import { useUiStore } from '../../store/uiStore';

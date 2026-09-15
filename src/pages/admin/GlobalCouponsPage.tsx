@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Coupon } from '../../types';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
-import { Tag, Plus, Trash2, Globe, CheckCircle2 } from 'lucide-react';
+import { Plus, Trash2, Globe } from 'lucide-react';
 
 export const GlobalCouponsPage: React.FC = () => {
   const [coupons, setCoupons] = useState<Coupon[]>([
@@ -123,7 +122,7 @@ export const GlobalCouponsPage: React.FC = () => {
                   : `$${c.value} FLAT DISCOUNT`}
               </p>
               <p>Min Purchase: <b>${c.minPurchase || 0}</b></p>
-              <p>Redemptions: <b>{c.usedCount.toLocaleString()}</b> / {c.usageLimit.toLocaleString()}</p>
+              <p>Redemptions: <b>{(c.usedCount || c.timesUsed || 0).toLocaleString()}</b> / {(c.usageLimit || c.totalUsageLimit || 1000).toLocaleString()}</p>
             </div>
 
             <div className="pt-4 border-t border-slate-800 flex justify-end">

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AreaChartCard } from '../../components/charts/AreaChartCard';
 import { BarChartCard } from '../../components/charts/BarChartCard';
 import { DonutChartCard } from '../../components/charts/DonutChartCard';
 import { MetricsCard } from '../../components/charts/MetricsCard';
@@ -10,7 +9,6 @@ import {
   Users,
   Eye,
   Percent,
-  Calendar,
   Download,
 } from 'lucide-react';
 
@@ -18,10 +16,10 @@ export const SellerAnalyticsPage: React.FC = () => {
   const [timeRange, setTimeRange] = useState('30d');
 
   const trafficData = [
-    { name: 'Direct Search', value: 45 },
-    { name: 'Category Browsing', value: 25 },
-    { name: 'Promotions & Deals', value: 20 },
-    { name: 'External Referrals', value: 10 },
+    { name: 'Direct Search', value: 45, color: '#6366f1' },
+    { name: 'Category Browsing', value: 25, color: '#06b6d4' },
+    { name: 'Promotions & Deals', value: 20, color: '#10b981' },
+    { name: 'External Referrals', value: 10, color: '#f59e0b' },
   ];
 
   const conversionFunnel = [

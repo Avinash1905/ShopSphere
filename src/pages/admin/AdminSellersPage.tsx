@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import { Seller } from '../../types';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import {
-  Store,
   Search,
   Star,
-  DollarSign,
-  Package,
   ShieldCheck,
-  Ban,
-  ExternalLink,
-  Eye,
 } from 'lucide-react';
 
 export const AdminSellersPage: React.FC = () => {
@@ -145,7 +138,7 @@ export const AdminSellersPage: React.FC = () => {
                         <div className="flex items-center gap-1.5">
                           <span className="font-bold text-white text-sm">{s.storeName}</span>
                           {s.isVerified && (
-                            <ShieldCheck className="w-4 h-4 text-emerald-400" title="Verified Merchant" />
+                            <span title="Verified Merchant"><ShieldCheck className="w-4 h-4 text-emerald-400" /></span>
                           )}
                         </div>
                         <span className="text-[10px] text-slate-400 font-mono">ID: #{s.id}</span>
@@ -153,7 +146,7 @@ export const AdminSellersPage: React.FC = () => {
                     </div>
                   </td>
                   <td className="py-3.5 px-6 font-mono font-bold text-white text-sm">
-                    ${s.totalSales.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    ${(s.totalSales || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                   </td>
                   <td className="py-3.5 px-6 font-bold text-slate-300">
                     {s.totalOrders}

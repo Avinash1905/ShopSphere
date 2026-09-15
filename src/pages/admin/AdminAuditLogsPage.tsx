@@ -1,23 +1,16 @@
 import React, { useState } from 'react';
 import { AuditLog } from '../../types';
-import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
-import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import {
-  ScrollText,
   Search,
-  Filter,
   Download,
-  ShieldAlert,
-  Info,
-  AlertTriangle,
   Code,
 } from 'lucide-react';
 
 export const AdminAuditLogsPage: React.FC = () => {
-  const [logs, setLogs] = useState<AuditLog[]>([
+  const [logs] = useState<AuditLog[]>([
     {
       id: 'log_1',
       userId: 'usr_admin_1',
@@ -74,8 +67,8 @@ export const AdminAuditLogsPage: React.FC = () => {
   const filtered = logs.filter(
     (l) =>
       l.action.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      l.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      l.ipAddress.includes(searchQuery)
+      (l.userName || l.actorName || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (l.ipAddress || '').includes(searchQuery)
   );
 
   return (
@@ -125,7 +118,7 @@ export const AdminAuditLogsPage: React.FC = () => {
               {filtered.map((log) => (
                 <tr key={log.id} className="hover:bg-slate-900/40">
                   <td className="py-3.5 px-6 text-slate-400 font-mono">
-                    {new Date(log.createdAt).toLocaleString()}
+                    {new Date(log.createdAt || log.timestamp || Date.now()).toLocaleString()}
                   </td>
                   <td className="py-3.5 px-6 font-mono font-bold text-indigo-400">
                     {log.action}

@@ -2,20 +2,12 @@ import React, { useState } from 'react';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
-import { Input } from '../../components/common/Input';
 import { Modal } from '../../components/common/Modal';
-import { PriceDisplay } from '../../components/ecommerce/PriceDisplay';
 import {
-  RotateCcw,
-  Search,
-  CheckCircle2,
-  XCircle,
   Eye,
-  AlertTriangle,
 } from 'lucide-react';
-import { cn } from '../../utils/cn';
 
-interface ReturnRequest {
+interface ReturnRequestItem {
   id: string;
   orderId: string;
   customerName: string;
@@ -27,7 +19,7 @@ interface ReturnRequest {
 }
 
 export const SellerReturnsPage: React.FC = () => {
-  const [returns, setReturns] = useState<ReturnRequest[]>([
+  const [returns, setReturns] = useState<ReturnRequestItem[]>([
     {
       id: 'RET-001',
       orderId: 'ORD-98124',
@@ -50,7 +42,7 @@ export const SellerReturnsPage: React.FC = () => {
     },
   ]);
 
-  const [selectedReturn, setSelectedReturn] = useState<ReturnRequest | null>(null);
+  const [selectedReturn, setSelectedReturn] = useState<ReturnRequestItem | null>(null);
 
   const handleApprove = (id: string) => {
     setReturns(returns.map((r) => (r.id === id ? { ...r, status: 'approved' } : r)));

@@ -7,20 +7,17 @@ import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import {
-  Boxes,
   Search,
   Plus,
   Minus,
   AlertTriangle,
   Download,
-  CheckCircle2,
-  RefreshCw,
   Edit2,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
 export const SellerInventoryPage: React.FC = () => {
-  const { products, fetchSellerProducts, updateProductStock, isLoading } = useSellerStore();
+  const { products, fetchSellerProducts, updateProductStock } = useSellerStore();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filterLowStock, setFilterLowStock] = useState(false);
@@ -33,16 +30,18 @@ export const SellerInventoryPage: React.FC = () => {
   }, [fetchSellerProducts]);
 
   const filtered = products.filter((p) => {
+    const title = p.name || p.title || '';
+    const stock = p.stock ?? p.totalInventory ?? 0;
     const matchesSearch =
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.sku.toLowerCase().includes(searchQuery.toLowerCase());
-    if (filterLowStock) return matchesSearch && p.stock <= 10;
+    if (filterLowStock) return matchesSearch && stock <= 10;
     return matchesSearch;
   });
 
   const handleOpenRestock = (product: Product) => {
     setSelectedProduct(product);
-    setNewStockVal(product.stock);
+    setNewStockVal(product.stock ?? product.totalInventory ?? 0);
     setIsModalOpen(true);
   };
 
@@ -75,7 +74,7 @@ export const SellerInventoryPage: React.FC = () => {
           <Input
             placeholder="Search by SKU or title..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
             leftIcon={<Search className="w-4 h-4 text-slate-400" />}
           />
         </div>
@@ -92,7 +91,7 @@ export const SellerInventoryPage: React.FC = () => {
             )}
           >
             <AlertTriangle className="w-4 h-4" />
-            <span>Low Stock Only ({products.filter((p) => p.stock <= 10).length})</span>
+            <span>Low Stock Only ({products.filter((p) => (p.stock ?? p.totalInventory ?? 0) <= 10).length})</span>
           </button>
         </div>
       </div>
@@ -113,19 +112,22 @@ export const SellerInventoryPage: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {filtered.map((p) => {
-                const isLow = p.stock <= 10;
-                const isOutOfStock = p.stock === 0;
+                const stockCount = p.stock ?? p.totalInventory ?? 0;
+                const isLow = stockCount <= 10 && stockCount > 0;
+                const isOutOfStock = stockCount === 0;
+                const title = p.name || p.title;
+
                 return (
                   <tr key={p.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-3">
                         <img
                           src={p.images[0]?.url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=80'}
-                          alt={p.name}
+                          alt={title}
                           className="w-10 h-10 object-cover rounded-lg border border-slate-200 dark:border-slate-700 shrink-0"
                         />
                         <span className="font-bold text-slate-900 dark:text-white line-clamp-1 max-w-xs">
-                          {p.name}
+                          {title}
                         </span>
                       </div>
                     </td>
@@ -136,7 +138,7 @@ export const SellerInventoryPage: React.FC = () => {
                       Aisle 04 / Bin {p.id.slice(-2)}
                     </td>
                     <td className="py-3.5 px-4 font-mono font-bold text-sm text-slate-900 dark:text-white">
-                      {p.stock}
+                      {stockCount}
                     </td>
                     <td className="py-3.5 px-4">
                       {isOutOfStock ? (
@@ -175,7 +177,7 @@ export const SellerInventoryPage: React.FC = () => {
           <div className="space-y-4 pt-2">
             <div>
               <p className="font-bold text-sm text-slate-900 dark:text-white">
-                {selectedProduct.name}
+                {selectedProduct.name || selectedProduct.title}
               </p>
               <p className="text-xs text-slate-400 font-mono">SKU: {selectedProduct.sku}</p>
             </div>

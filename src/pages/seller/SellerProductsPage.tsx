@@ -6,26 +6,18 @@ import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { Badge } from '../../components/common/Badge';
-import { PriceDisplay } from '../../components/ecommerce/PriceDisplay';
 import {
   Plus,
   Search,
-  Filter,
   Edit3,
   Trash2,
   Eye,
-  MoreVertical,
-  ArrowUpDown,
-  Tag,
-  CheckCircle2,
-  XCircle,
-  Clock,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
 export const SellerProductsPage: React.FC = () => {
   const navigate = useNavigate();
-  const { products, fetchSellerProducts, deleteProduct, isLoading } = useSellerStore();
+  const { products, fetchSellerProducts, deleteProduct } = useSellerStore();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -36,10 +28,12 @@ export const SellerProductsPage: React.FC = () => {
   }, [fetchSellerProducts]);
 
   const filtered = products.filter((p) => {
+    const title = p.name || p.title || '';
     const matchesSearch =
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.sku.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCat = categoryFilter === 'all' || p.categoryId === categoryFilter;
+    const catName = typeof p.category === 'string' ? p.category : p.category.name;
+    const matchesCat = categoryFilter === 'all' || catName.toLowerCase().includes(categoryFilter.toLowerCase());
     const matchesStatus = statusFilter === 'all' || p.status === statusFilter;
     return matchesSearch && matchesCat && matchesStatus;
   });
@@ -57,6 +51,7 @@ export const SellerProductsPage: React.FC = () => {
       case 'draft':
         return <Badge variant="secondary" size="sm">Draft</Badge>;
       case 'pending':
+      case 'pending_approval':
         return <Badge variant="warning" size="sm">Under Review</Badge>;
       case 'rejected':
         return <Badge variant="danger" size="sm">Rejected</Badge>;
@@ -90,7 +85,7 @@ export const SellerProductsPage: React.FC = () => {
           <Input
             placeholder="Search by title or SKU..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
             leftIcon={<Search className="w-4 h-4 text-slate-400" />}
           />
         </div>
@@ -114,9 +109,9 @@ export const SellerProductsPage: React.FC = () => {
             className="px-3 py-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300"
           >
             <option value="all">All Categories</option>
-            <option value="cat_electronics">Electronics</option>
-            <option value="cat_fashion">Fashion</option>
-            <option value="cat_home">Home & Living</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="home">Home & Living</option>
           </select>
         </div>
       </div>
@@ -144,75 +139,82 @@ export const SellerProductsPage: React.FC = () => {
                   </td>
                 </tr>
               ) : (
-                filtered.map((p) => (
-                  <tr key={p.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-                    <td className="py-3.5 px-4">
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={p.images[0]?.url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100'}
-                          alt={p.name}
-                          className="w-12 h-12 object-cover rounded-lg border border-slate-200 dark:border-slate-700 shrink-0"
-                        />
-                        <div>
-                          <p className="font-bold text-slate-900 dark:text-white line-clamp-1 max-w-xs">
-                            {p.name}
-                          </p>
-                          <span className="text-[10px] text-slate-400">{p.brand}</span>
+                filtered.map((p) => {
+                  const title = p.name || p.title;
+                  const brandName = typeof p.brand === 'string' ? p.brand : p.brand?.name || 'Aura';
+                  const catName = typeof p.category === 'string' ? p.category : p.category?.name || 'Electronics';
+                  const stockCount = p.stock ?? p.totalInventory ?? 50;
+
+                  return (
+                    <tr key={p.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+                      <td className="py-3.5 px-4">
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={p.images[0]?.url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100'}
+                            alt={title}
+                            className="w-12 h-12 object-cover rounded-lg border border-slate-200 dark:border-slate-700 shrink-0"
+                          />
+                          <div>
+                            <p className="font-bold text-slate-900 dark:text-white line-clamp-1 max-w-xs">
+                              {title}
+                            </p>
+                            <span className="text-[10px] text-slate-400">{brandName}</span>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="py-3.5 px-4 font-mono font-medium text-slate-600 dark:text-slate-400">
-                      {p.sku}
-                    </td>
-                    <td className="py-3.5 px-4 text-slate-600 dark:text-slate-400 capitalize">
-                      {p.category}
-                    </td>
-                    <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">
-                      ${p.price.toFixed(2)}
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <span
-                        className={cn(
-                          'font-bold font-mono',
-                          p.stock <= 5 ? 'text-rose-600' : 'text-slate-700 dark:text-slate-300'
-                        )}
-                      >
-                        {p.stock}
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4">
-                      {getStatusBadge(p.status)}
-                    </td>
-                    <td className="py-3.5 px-4 text-right">
-                      <div className="flex items-center justify-end gap-1">
-                        <button
-                          type="button"
-                          onClick={() => navigate(`/product/${p.id}`)}
-                          className="p-1.5 hover:text-indigo-600 text-slate-400 transition-colors"
-                          title="View Live Listing"
+                      </td>
+                      <td className="py-3.5 px-4 font-mono font-medium text-slate-600 dark:text-slate-400">
+                        {p.sku}
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-600 dark:text-slate-400 capitalize">
+                        {catName}
+                      </td>
+                      <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">
+                        ${p.price.toFixed(2)}
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span
+                          className={cn(
+                            'font-bold font-mono',
+                            stockCount <= 5 ? 'text-rose-600' : 'text-slate-700 dark:text-slate-300'
+                          )}
                         >
-                          <Eye className="w-4 h-4" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => navigate(`/seller/products/edit/${p.id}`)}
-                          className="p-1.5 hover:text-indigo-600 text-slate-400 transition-colors"
-                          title="Edit Product"
-                        >
-                          <Edit3 className="w-4 h-4" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(p.id)}
-                          className="p-1.5 hover:text-rose-600 text-slate-400 transition-colors"
-                          title="Delete Product"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                          {stockCount}
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4">
+                        {getStatusBadge(p.status)}
+                      </td>
+                      <td className="py-3.5 px-4 text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          <button
+                            type="button"
+                            onClick={() => navigate(`/product/${p.id}`)}
+                            className="p-1.5 hover:text-indigo-600 text-slate-400 transition-colors"
+                            title="View Live Listing"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => navigate(`/seller/products/edit/${p.id}`)}
+                            className="p-1.5 hover:text-indigo-600 text-slate-400 transition-colors"
+                            title="Edit Product"
+                          >
+                            <Edit3 className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(p.id)}
+                            className="p-1.5 hover:text-rose-600 text-slate-400 transition-colors"
+                            title="Delete Product"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>

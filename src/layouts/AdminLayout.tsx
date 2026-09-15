@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-import { useAdminStore } from '../store/adminStore';
 import { Avatar } from '../components/common/Avatar';
 import { Badge } from '../components/common/Badge';
 import {
@@ -20,7 +19,6 @@ import {
   Menu,
   X,
   ChevronDown,
-  Bell,
   ExternalLink,
 } from 'lucide-react';
 import { cn } from '../utils/cn';
