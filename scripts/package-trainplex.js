@@ -8,26 +8,35 @@ import path from 'path';
 import { execSync } from 'child_process';
 
 const outputZip = path.join(process.cwd(), 'ShopSphere-TrainPlex.zip');
+const tempDir = path.join(process.cwd(), '.trainplex_staging');
 console.log('📦 Preparing ShopSphere-TrainPlex.zip archive...');
 
 if (fs.existsSync(outputZip)) {
   fs.unlinkSync(outputZip);
 }
+if (fs.existsSync(tempDir)) {
+  fs.rmSync(tempDir, { recursive: true, force: true });
+}
 
 try {
-  // Use PowerShell Compress-Archive on Windows
-  const excludeItems = ['node_modules', '.git', 'dist', 'coverage', '.cache', 'ShopSphere-TrainPlex.zip'];
-  const tempDir = path.join(process.cwd(), '.trainplex_staging');
-  
-  if (fs.existsSync(tempDir)) {
-    fs.rmSync(tempDir, { recursive: true, force: true });
-  }
+  const excludeItems = new Set([
+    'node_modules',
+    '.git',
+    'dist',
+    'coverage',
+    '.cache',
+    '.trainplex_staging',
+    'ShopSphere-TrainPlex.zip',
+    '.gemini',
+    '.system_generated'
+  ]);
+
   fs.mkdirSync(tempDir, { recursive: true });
 
   const copyRecursive = (src, dest) => {
     const entries = fs.readdirSync(src, { withFileTypes: true });
     for (const entry of entries) {
-      if (excludeItems.includes(entry.name)) continue;
+      if (excludeItems.has(entry.name)) continue;
       const srcPath = path.join(src, entry.name);
       const destPath = path.join(dest, entry.name);
       if (entry.isDirectory()) {

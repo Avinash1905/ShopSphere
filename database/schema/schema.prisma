@@ -1,0 +1,56 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                String    @id @default(uuid())
+  email             String    @unique
+  passwordHash      String
+  firstName         String
+  lastName          String
+  role              String    @default("customer")
+  status            String    @default("active")
+  twoFactorEnabled  Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Product {
+  id                String    @id @default(uuid())
+  sellerId          String
+  title             String
+  slug              String    @unique
+  description       String
+  basePrice         Float
+  originalPrice     Float?
+  stockQuantity     Int       @default(0)
+  rating            Float     @default(0)
+  reviewCount       Int       @default(0)
+  categoryId        String
+  brandId           String?
+  status            String    @default("published")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Order {
+  id                String    @id @default(uuid())
+  orderNumber       String    @unique
+  customerId        String
+  status            String    @default("PENDING")
+  subtotal          Float
+  taxAmount         Float
+  shippingFee       Float
+  discountAmount    Float     @default(0)
+  totalAmount       Float
+  currency          String    @default("USD")
+  paymentMethod     String
+  paymentStatus     String    @default("PENDING")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
