@@ -88,6 +88,6 @@ ShopSphere/
 ├── systems/                     # Search, Pricing, Shipping, Inventory, FSM, Payments & Security
 ├── docs/                        # Architecture, Deployment & 26 OpenAPI YAML Specs
 ├── scripts/                     # Recursive LOC Analyzer & TrainPlex Packager
-├── .env.example                 # Safe Environment Variables Template
+├── env.template                 # Safe Environment Variables Template
 └── ShopSphere-TrainPlex.zip      # Standalone Distribution Archive
 ```
