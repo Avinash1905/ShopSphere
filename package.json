@@ -10,7 +10,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "count:loc": "node scripts/count-loc.js",
+    "package:trainplex": "node scripts/package-trainplex.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
