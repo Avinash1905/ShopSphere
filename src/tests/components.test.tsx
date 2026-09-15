@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
 import { Button } from '../components/common/Button';
 import { Badge } from '../components/common/Badge';
 import { PriceDisplay } from '../components/ecommerce/PriceDisplay';
