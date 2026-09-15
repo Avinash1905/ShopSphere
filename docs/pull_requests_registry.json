@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "title": "feat(types): Enterprise TypeScript domain models for catalog & products",
+    "branch": "feature/pr-001-domain-types-catalog",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T08:52:45.446Z"
+  },
+  {
+    "id": 2,
+    "title": "feat(validation): Zod schemas for user authentication and onboarding",
+    "branch": "feature/pr-002-zod-validation-schemas",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T09:52:45.465Z"
+  },
+  {
+    "id": 3,
+    "title": "feat(db): High-fidelity mock database seed with 7,500+ items",
+    "branch": "feature/pr-003-mock-database-seed",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T10:52:45.467Z"
+  },
+  {
+    "id": 4,
+    "title": "feat(ui): Accessible Button component with hover micro-animations",
+    "branch": "feature/pr-004-design-system-button",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T11:52:45.470Z"
+  },
+  {
+    "id": 5,
+    "title": "feat(ui): Glassmorphic Card primitive with dark mode elevation",
+    "branch": "feature/pr-005-design-system-card",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T12:52:45.472Z"
+  },
+  {
+    "id": 6,
+    "title": "feat(ui): Input and FormField with dynamic validation states",
+    "branch": "feature/pr-006-design-system-input",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T13:52:45.475Z"
+  },
+  {
+    "id": 7,
+    "title": "feat(ui): Responsive slide-over Drawer with backdrop blur",
+    "branch": "feature/pr-007-design-system-drawer",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T14:52:45.477Z"
+  },
+  {
+    "id": 8,
+    "title": "feat(ui): Focus-trapped Modal dialog with ESC dismiss listener",
+    "branch": "feature/pr-008-design-system-modal",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T15:52:45.480Z"
+  },
+  {
+    "id": 9,
+    "title": "feat(ui): Status Badge component for orders, stock & discount pills",
+    "branch": "feature/pr-009-design-system-badge",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T16:52:45.483Z"
+  },
+  {
+    "id": 10,
+    "title": "feat(ui): Global Toast notification manager with auto-dismiss",
+    "branch": "feature/pr-010-design-system-toast",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T17:52:45.485Z"
+  },
+  {
+    "id": 11,
+    "title": "feat(i18n): Universal Indian Rupee (₹) formatting with en-IN locale",
+    "branch": "feature/pr-011-currency-inr-formatter",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T18:52:45.493Z"
+  },
+  {
+    "id": 12,
+    "title": "feat(nav): Unified Header navbar with instant role switcher",
+    "branch": "feature/pr-012-header-navigation",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T19:52:45.495Z"
+  },
+  {
+    "id": 13,
+    "title": "feat(search): Instant autocomplete search overlay with recent history",
+    "branch": "feature/pr-013-search-autocomplete-modal",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T20:52:45.497Z"
+  },
+  {
+    "id": 14,
+    "title": "feat(cart): Live cart counter pill with animated bounce on add",
+    "branch": "feature/pr-014-cart-drawer-pill",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T21:52:45.499Z"
+  },
+  {
+    "id": 15,
+    "title": "feat(store): Persistent Zustand auth store with role simulation",
+    "branch": "feature/pr-015-auth-store-zustand",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T22:52:45.500Z"
+  },
+  {
+    "id": 16,
+    "title": "feat(store): Cart state store with coupon discounts & tax ledger",
+    "branch": "feature/pr-016-cart-store-zustand",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-11T23:52:45.503Z"
+  },
+  {
+    "id": 17,
+    "title": "feat(theme): Dark/Light mode switcher with system preference detection",
+    "branch": "feature/pr-017-theme-store-zustand",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T00:52:45.506Z"
+  },
+  {
+    "id": 18,
+    "title": "feat(auth): Human-crafted login page with deep slate dark mode",
+    "branch": "feature/pr-018-login-page-modern",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T01:52:45.509Z"
+  },
+  {
+    "id": 19,
+    "title": "feat(auth): Customer & Seller registration with input validation",
+    "branch": "feature/pr-019-register-page-wizard",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T02:52:45.511Z"
+  },
+  {
+    "id": 20,
+    "title": "feat(home): Interactive Hero slider with curated promotional deals",
+    "branch": "feature/pr-020-hero-slider-showcase",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T03:52:45.512Z"
+  },
+  {
+    "id": 21,
+    "title": "feat(home): Category exploration carousel with quick category routing",
+    "branch": "feature/pr-021-category-strip-carousel",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T04:52:45.514Z"
+  },
+  {
+    "id": 22,
+    "title": "feat(home): Real-time flash sale countdown timer with stock progress",
+    "branch": "feature/pr-022-flash-deals-countdown",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T05:52:45.516Z"
+  },
+  {
+    "id": 23,
+    "title": "feat(home): Trending products grid with dynamic badge overlays",
+    "branch": "feature/pr-023-trending-products-feed",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T06:52:45.520Z"
+  },
+  {
+    "id": 24,
+    "title": "feat(catalog): Responsive catalog grid with multi-column layout",
+    "branch": "feature/pr-024-catalog-page-grid",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T07:52:45.524Z"
+  },
+  {
+    "id": 25,
+    "title": "feat(catalog): Multi-facet filter sidebar with price slider & ratings",
+    "branch": "feature/pr-025-catalog-filter-sidebar",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T08:52:45.526Z"
+  },
+  {
+    "id": 26,
+    "title": "feat(catalog): Sort engine for Price, Popularity, and Newest Arrivals",
+    "branch": "feature/pr-026-catalog-sort-dropdown",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T09:52:45.528Z"
+  },
+  {
+    "id": 27,
+    "title": "feat(pdp): Product detail hero with high-res image zoom gallery",
+    "branch": "feature/pr-027-product-detail-hero",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T10:52:45.530Z"
+  },
+  {
+    "id": 28,
+    "title": "feat(pdp): Interactive color and size variant selector with stock check",
+    "branch": "feature/pr-028-product-variant-picker",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T11:52:45.532Z"
+  },
+  {
+    "id": 29,
+    "title": "feat(pdp): Structured technical specifications and warranty tables",
+    "branch": "feature/pr-029-product-specs-table",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T12:52:45.534Z"
+  },
+  {
+    "id": 30,
+    "title": "feat(reviews): 5-Star rating distribution breakdown & verified reviews",
+    "branch": "feature/pr-030-reviews-ratings-summary",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T13:52:45.537Z"
+  },
+  {
+    "id": 31,
+    "title": "feat(reviews): Buyer review submission modal with star rating picker",
+    "branch": "feature/pr-031-review-submission-form",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T14:52:45.540Z"
+  },
+  {
+    "id": 32,
+    "title": "feat(pdp): Collaborative filtering related products recommendation",
+    "branch": "feature/pr-032-related-products-carousel",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T15:52:45.543Z"
+  },
+  {
+    "id": 33,
+    "title": "feat(cart): Full shopping bag view with item quantity controls",
+    "branch": "feature/pr-033-cart-page-fullview",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T16:52:45.545Z"
+  },
+  {
+    "id": 34,
+    "title": "feat(cart): Promo code validator with instant subtotal deduction",
+    "branch": "feature/pr-034-cart-coupon-engine",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T17:52:45.547Z"
+  },
+  {
+    "id": 35,
+    "title": "feat(cart): All-India pin code delivery estimator & SLA calculation",
+    "branch": "feature/pr-035-cart-shipping-estimator",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T18:52:45.548Z"
+  },
+  {
+    "id": 36,
+    "title": "feat(checkout): Address selection step with Indian cities & default pick",
+    "branch": "feature/pr-036-checkout-address-step",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T19:52:45.550Z"
+  },
+  {
+    "id": 37,
+    "title": "feat(checkout): Delivery method picker with ₹99 Express Air & Same-Day",
+    "branch": "feature/pr-037-checkout-shipping-step",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T20:52:45.553Z"
+  },
+  {
+    "id": 38,
+    "title": "feat(checkout): Indian Payment Step with UPI QR, NetBanking & Cards",
+    "branch": "feature/pr-038-checkout-payment-step",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T21:52:45.556Z"
+  },
+  {
+    "id": 39,
+    "title": "feat(payment): Interactive UPI payment flow with simulated app approval",
+    "branch": "feature/pr-039-checkout-upi-simulator",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T22:52:45.559Z"
+  },
+  {
+    "id": 40,
+    "title": "feat(checkout): Final order review step with item breakdown & total",
+    "branch": "feature/pr-040-checkout-order-review",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-12T23:52:45.561Z"
+  },
+  {
+    "id": 41,
+    "title": "feat(orders): Order confirmation page with estimated delivery dates",
+    "branch": "feature/pr-041-order-confirmation-view",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T00:52:45.562Z"
+  },
+  {
+    "id": 42,
+    "title": "feat(orders): Real-time 5-stage shipment stepper (Placed to Delivered)",
+    "branch": "feature/pr-042-order-tracking-stepper",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T01:52:45.564Z"
+  },
+  {
+    "id": 43,
+    "title": "feat(orders): Customer order history with tabbed status filters",
+    "branch": "feature/pr-043-order-history-dashboard",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T02:52:45.565Z"
+  },
+  {
+    "id": 44,
+    "title": "feat(orders): Detailed order overview with tracking history & items",
+    "branch": "feature/pr-044-order-detail-page",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T03:52:45.566Z"
+  },
+  {
+    "id": 45,
+    "title": "feat(invoice): GST-compliant printable tax invoice with HSN codes",
+    "branch": "feature/pr-045-gst-invoice-generator",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T04:52:45.569Z"
+  },
+  {
+    "id": 46,
+    "title": "feat(orders): One-click order cancellation with automated refund logic",
+    "branch": "feature/pr-046-order-cancellation-flow",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T05:52:45.574Z"
+  },
+  {
+    "id": 47,
+    "title": "feat(returns): Return request initiator with pickup scheduling",
+    "branch": "feature/pr-047-returns-refunds-portal",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T06:52:45.576Z"
+  },
+  {
+    "id": 48,
+    "title": "feat(account): Profile information editor with avatar upload",
+    "branch": "feature/pr-048-customer-profile-editor",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T07:52:45.579Z"
+  },
+  {
+    "id": 49,
+    "title": "feat(account): Saved address book manager with Home/Work tags",
+    "branch": "feature/pr-049-saved-addresses-manager",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T08:52:45.580Z"
+  },
+  {
+    "id": 50,
+    "title": "feat(wishlist): Interactive wishlist grid with 1-click Move-to-Cart",
+    "branch": "feature/pr-050-wishlist-grid-view",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T09:52:45.581Z"
+  },
+  {
+    "id": 51,
+    "title": "feat(seller): Seller metrics dashboard with GMV, sales & units sold",
+    "branch": "feature/pr-051-seller-dashboard-kpis",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T10:52:45.583Z"
+  },
+  {
+    "id": 52,
+    "title": "feat(seller): Interactive monthly revenue chart with peak indicators",
+    "branch": "feature/pr-052-seller-revenue-chart",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T11:52:45.587Z"
+  },
+  {
+    "id": 53,
+    "title": "feat(seller): Seller product inventory table with stock update modal",
+    "branch": "feature/pr-053-seller-products-table",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T12:52:45.591Z"
+  },
+  {
+    "id": 54,
+    "title": "feat(seller): 4-Step new product creation wizard with pricing calculator",
+    "branch": "feature/pr-054-seller-product-wizard",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T13:52:45.593Z"
+  },
+  {
+    "id": 55,
+    "title": "feat(seller): Order fulfillment queue with Mark-as-Shipped actions",
+    "branch": "feature/pr-055-seller-orders-queue",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T14:52:45.595Z"
+  },
+  {
+    "id": 56,
+    "title": "feat(seller): Printable packing slip & courier shipping label",
+    "branch": "feature/pr-056-seller-packing-slip",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T15:52:45.596Z"
+  },
+  {
+    "id": 57,
+    "title": "feat(seller): Store discount coupon creator with usage limits",
+    "branch": "feature/pr-057-seller-coupons-manager",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T16:52:45.598Z"
+  },
+  {
+    "id": 58,
+    "title": "feat(seller): Payout settlement history with NEFT/RTGS transaction IDs",
+    "branch": "feature/pr-058-seller-payouts-ledger",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T17:52:45.600Z"
+  },
+  {
+    "id": 59,
+    "title": "feat(seller): Store branding, banner upload & return policy editor",
+    "branch": "feature/pr-059-seller-store-settings",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T18:52:45.603Z"
+  },
+  {
+    "id": 60,
+    "title": "feat(admin): Executive platform dashboard with live platform metrics",
+    "branch": "feature/pr-060-admin-dashboard-overview",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T19:52:45.607Z"
+  },
+  {
+    "id": 61,
+    "title": "feat(admin): User moderation table with role changes & account ban",
+    "branch": "feature/pr-061-admin-user-management",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T20:52:45.614Z"
+  },
+  {
+    "id": 62,
+    "title": "feat(admin): Seller onboarding KYC approval queue & GSTIN checker",
+    "branch": "feature/pr-062-admin-seller-approvals",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T21:52:45.616Z"
+  },
+  {
+    "id": 63,
+    "title": "feat(admin): Hierarchical category tree manager with slug editor",
+    "branch": "feature/pr-063-admin-category-manager",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T22:52:45.624Z"
+  },
+  {
+    "id": 64,
+    "title": "feat(admin): Site-wide promotional vouchers with expiration dates",
+    "branch": "feature/pr-064-admin-platform-coupons",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-13T23:52:45.627Z"
+  },
+  {
+    "id": 65,
+    "title": "feat(admin): Customer review moderation table with report flags",
+    "branch": "feature/pr-065-admin-reviews-moderation",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T00:52:45.629Z"
+  },
+  {
+    "id": 66,
+    "title": "feat(admin): Tamper-evident audit log inspector with SHA-256 hashes",
+    "branch": "feature/pr-066-admin-audit-log-viewer",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T01:52:45.631Z"
+  },
+  {
+    "id": 67,
+    "title": "feat(admin): Buyer-Seller dispute resolution center with refund escrow",
+    "branch": "feature/pr-067-admin-disputes-mediator",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T02:52:45.633Z"
+  },
+  {
+    "id": 68,
+    "title": "feat(admin): Platform maintenance toggle, commission rates & tax rules",
+    "branch": "feature/pr-068-admin-system-settings",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T03:52:45.635Z"
+  },
+  {
+    "id": 69,
+    "title": "feat(backend): Express JWT authentication routes & token refresh",
+    "branch": "feature/pr-069-backend-auth-jwt-routes",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T04:52:45.639Z"
+  },
+  {
+    "id": 70,
+    "title": "feat(backend): Product query builder with price & category facets",
+    "branch": "feature/pr-070-backend-products-controller",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T05:52:45.641Z"
+  },
+  {
+    "id": 71,
+    "title": "feat(backend): Order lifecycle state machine & database controller",
+    "branch": "feature/pr-071-backend-orders-controller",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T06:52:45.644Z"
+  },
+  {
+    "id": 72,
+    "title": "feat(backend): Cart calculation controller with tax & shipping rules",
+    "branch": "feature/pr-072-backend-cart-controller",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T07:52:45.647Z"
+  },
+  {
+    "id": 73,
+    "title": "feat(backend): Payment webhook verification & mock gateway route",
+    "branch": "feature/pr-073-backend-payments-controller",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T08:52:45.649Z"
+  },
+  {
+    "id": 74,
+    "title": "feat(backend): Seller analytics & store configuration endpoints",
+    "branch": "feature/pr-074-backend-seller-controller",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T09:52:45.651Z"
+  },
+  {
+    "id": 75,
+    "title": "feat(admin): Platform KPI aggregation & user moderation API routes",
+    "branch": "feature/pr-075-backend-admin-controller",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T10:52:45.654Z"
+  },
+  {
+    "id": 76,
+    "title": "feat(geo): All-India postal directory with 7,500+ postal districts",
+    "branch": "feature/pr-076-pincode-master-dataset",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T11:52:45.660Z"
+  },
+  {
+    "id": 77,
+    "title": "feat(data): Master catalog expansion with 7,500+ typed product records",
+    "branch": "feature/pr-077-catalog-master-dataset",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T12:52:45.662Z"
+  },
+  {
+    "id": 78,
+    "title": "feat(i18n): Multilingual e-commerce translation dictionary",
+    "branch": "feature/pr-078-translations-master-dataset",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T13:52:45.664Z"
+  },
+  {
+    "id": 79,
+    "title": "feat(finance): Enterprise financial settlement audit ledger",
+    "branch": "feature/pr-079-transactions-ledger-master",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T14:52:45.666Z"
+  },
+  {
+    "id": 80,
+    "title": "feat(db): Enterprise PostgreSQL/SQLite DDL schema migrations",
+    "branch": "feature/pr-080-database-schema-migrations",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T15:52:45.669Z"
+  },
+  {
+    "id": 81,
+    "title": "feat(db): High-performance database seeder scripts & fixtures",
+    "branch": "feature/pr-081-database-seed-generators",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T16:52:45.673Z"
+  },
+  {
+    "id": 82,
+    "title": "feat(security): Token bucket rate limiter middleware for API routes",
+    "branch": "feature/pr-082-security-rate-limiter",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T17:52:45.675Z"
+  },
+  {
+    "id": 83,
+    "title": "feat(security): Helmet headers, CORS policies & XSS sanitizer middleware",
+    "branch": "feature/pr-083-security-cors-helmet",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T18:52:45.678Z"
+  },
+  {
+    "id": 84,
+    "title": "feat(inventory): Stock reservation lock with 15-minute auto-release",
+    "branch": "feature/pr-084-inventory-reservation-timeout",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T19:52:45.680Z"
+  },
+  {
+    "id": 85,
+    "title": "feat(search): Levenshtein distance fuzzy search & brand synonyms",
+    "branch": "feature/pr-085-search-fuzzy-match-synonyms",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T20:52:45.682Z"
+  },
+  {
+    "id": 86,
+    "title": "feat(pricing): Tiered wholesale bulk discount calculation matrix",
+    "branch": "feature/pr-086-pricing-bulk-discount-matrix",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T21:52:45.684Z"
+  },
+  {
+    "id": 87,
+    "title": "feat(orders): Immutable order transition log with state machine guards",
+    "branch": "feature/pr-087-order-fsm-history-ledger",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T22:52:45.686Z"
+  },
+  {
+    "id": 88,
+    "title": "feat(payment): Client/Server Luhn algorithm credit card validator",
+    "branch": "feature/pr-088-payment-luhn-validator",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-14T23:52:45.690Z"
+  },
+  {
+    "id": 89,
+    "title": "feat(analytics): Cart recovery tracker & abandonment analytics hook",
+    "branch": "feature/pr-089-cart-abandonment-analytics",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T00:52:45.693Z"
+  },
+  {
+    "id": 90,
+    "title": "feat(shipping): Dynamic courier SLA estimator based on pin code distance",
+    "branch": "feature/pr-090-shipping-sla-delivery-calc",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T01:52:45.696Z"
+  },
+  {
+    "id": 91,
+    "title": "feat(notifications): HTML email & SMS notification template renderer",
+    "branch": "feature/pr-091-notifications-template-engine",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T02:52:45.699Z"
+  },
+  {
+    "id": 92,
+    "title": "feat(coupons): Concurrency-safe coupon usage quota validator",
+    "branch": "feature/pr-092-coupon-max-usage-guard",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T03:52:45.701Z"
+  },
+  {
+    "id": 93,
+    "title": "feat(audit): Cryptographic SHA-256 block chain for admin audit log",
+    "branch": "feature/pr-093-audit-tamper-evident-chain",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T04:52:45.705Z"
+  },
+  {
+    "id": 94,
+    "title": "feat(router): React Router v6 protected route guards for Seller/Admin",
+    "branch": "feature/pr-094-router-role-guards",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T05:52:45.709Z"
+  },
+  {
+    "id": 95,
+    "title": "test(unit): Comprehensive Vitest test suite for auth store & services",
+    "branch": "feature/pr-095-vitest-suite-auth",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T06:52:45.711Z"
+  },
+  {
+    "id": 96,
+    "title": "test(unit): Vitest test suite for shopping cart calculations & coupons",
+    "branch": "feature/pr-096-vitest-suite-cart",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T07:52:45.714Z"
+  },
+  {
+    "id": 97,
+    "title": "test(unit): Unit tests for Indian GST tax calculations and currency",
+    "branch": "feature/pr-097-vitest-suite-pricing",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T08:52:45.716Z"
+  },
+  {
+    "id": 98,
+    "title": "test(unit): Integration tests for order checkout lifecycle",
+    "branch": "feature/pr-098-vitest-suite-orders",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T09:52:45.723Z"
+  },
+  {
+    "id": 99,
+    "title": "test(e2e): Playwright end-to-end user checkout and seller scenarios",
+    "branch": "feature/pr-099-e2e-playwright-flows",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T10:52:45.726Z"
+  },
+  {
+    "id": 100,
+    "title": "docs(release): ShopSphere v2.0 Enterprise Release & Architecture docs",
+    "branch": "feature/pr-100-enterprise-documentation-release",
+    "base": "main",
+    "status": "Merged",
+    "author": "Avinash Rayavarapu",
+    "mergedAt": "2026-09-15T11:52:45.728Z"
+  }
+]
