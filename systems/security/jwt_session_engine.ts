@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ShopSphere Security Subsystem - Stateless JWT & Cryptographic Session Token Engine
  * Features:
  * - HMAC-SHA256 signature signing and verification
@@ -32,6 +32,9 @@ export class JWTSessionEngine {
   ): string {
     const now = Math.floor(Date.now() / 1000);
     const fullPayload: JWTPayload = {
+      sub: payload.sub,
+      email: payload.email,
+      role: payload.role,
       ...payload,
       iat: now,
       exp: now + expiresInSeconds,

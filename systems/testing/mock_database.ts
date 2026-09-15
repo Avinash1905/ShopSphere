@@ -334,8 +334,16 @@ export class MockDatabaseAdapter implements MigrationDatabaseAdapter {
     this.tables.clear();
   }
 
+  public getAllTableNames(): string[] {
+    return Array.from(this.tables.keys());
+  }
+
   public getRawTableData(tableName: string): Record<string, any>[] {
     return this.tables.get(tableName.toLowerCase()) || [];
+  }
+
+  public setRawTableData(tableName: string, rows: Record<string, any>[]): void {
+    this.tables.set(tableName.toLowerCase(), rows);
   }
 
   private parseValuesList(valuesClause: string, params: any[], paramCursor: { current: number }): any[] {

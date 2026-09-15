@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ShopSphere Database Layer - Repository Multi-Level Caching Decorator
  * Features:
  * - Request-scoped L1 cache + In-memory TTL L2 cache
@@ -6,7 +6,7 @@
  * - Cache metrics (hits, misses, evictions, hit-ratio)
  */
 
-export interface CacheEntry<T> {
+export interface RepoCacheEntry<T> {
   value: T;
   tags: string[];
   expiresAt: number;
@@ -20,7 +20,7 @@ export interface CacheMetrics {
 }
 
 export class RepositoryCacheDecorator {
-  private static cache: Map<string, CacheEntry<any>> = new Map();
+  private static cache: Map<string, RepoCacheEntry<any>> = new Map();
   private static tagIndex: Map<string, Set<string>> = new Map();
   private static hits = 0;
   private static misses = 0;

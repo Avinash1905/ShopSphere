@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ShopSphere Audit Subsystem - Audit Lifecycle & Archival Manager
  * Features:
  * - Hot-to-Cold storage tiering (90-day active retention)
@@ -8,7 +8,7 @@
 
 import * as crypto from 'crypto';
 
-export interface AuditRecordPayload {
+export interface ArchivableAuditRecord {
   id: string;
   action: string;
   entityType: string;
@@ -33,13 +33,13 @@ export class AuditLifecycleArchiver {
    * Partitions records into active (hot) and archival (cold) batches
    */
   public static partitionByRetention(
-    records: AuditRecordPayload[],
+    records: ArchivableAuditRecord[],
     retentionDays: number = 90,
     referenceDate: Date = new Date()
-  ): { hotRecords: AuditRecordPayload[]; coldRecords: AuditRecordPayload[] } {
+  ): { hotRecords: ArchivableAuditRecord[]; coldRecords: ArchivableAuditRecord[] } {
     const cutoff = referenceDate.getTime() - retentionDays * 24 * 60 * 60 * 1000;
-    const hotRecords: AuditRecordPayload[] = [];
-    const coldRecords: AuditRecordPayload[] = [];
+    const hotRecords: ArchivableAuditRecord[] = [];
+    const coldRecords: ArchivableAuditRecord[] = [];
 
     for (const r of records) {
       if (new Date(r.createdAt).getTime() < cutoff) {
@@ -55,7 +55,7 @@ export class AuditLifecycleArchiver {
   /**
    * Seals a batch of cold records into an immutable archive manifest
    */
-  public static sealArchiveBatch(records: AuditRecordPayload[]): { manifest: ArchiveManifest; serializedData: string } {
+  public static sealArchiveBatch(records: ArchivableAuditRecord[]): { manifest: ArchiveManifest; serializedData: string } {
     if (records.length === 0) {
       throw new Error('Cannot seal an empty archive batch.');
     }

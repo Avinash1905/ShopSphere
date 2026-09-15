@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ShopSphere Database Layer - Migration Dry-Run & Safety Planner
  * Evaluates pending migration SQL statements before execution:
  * - Checks for destructive operations (DROP TABLE, DROP COLUMN, TRUNCATE)
@@ -6,7 +6,12 @@
  * - Calculates estimated execution impact and transaction safety
  */
 
-import { Migration } from './runner.js';
+export interface DryRunMigration {
+  id: string;
+  name: string;
+  up: { postgres: string[]; sqlite: string[] };
+  down?: { postgres?: string[]; sqlite?: string[] };
+}
 
 export interface MigrationSafetyReport {
   safeToExecute: boolean;
@@ -27,7 +32,7 @@ export interface MigrationSafetyReport {
 }
 
 export class MigrationDryRunner {
-  public static plan(migrations: Migration[], dialect: 'postgres' | 'sqlite' = 'postgres'): MigrationSafetyReport {
+  public static plan(migrations: DryRunMigration[], dialect: 'postgres' | 'sqlite' = 'postgres'): MigrationSafetyReport {
     const report: MigrationSafetyReport = {
       safeToExecute: true,
       totalStatements: 0,

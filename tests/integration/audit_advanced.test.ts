@@ -1,11 +1,11 @@
-﻿/**
+/**
  * Test Suite: Advanced Audit Subsystem Integration Test
  */
 
 import { describe, it } from '../../systems/testing/test_runner_framework.js';
 import { Assert } from '../../systems/testing/assertion_library.js';
 import { MerkleAuditTree } from '../../systems/audit/merkle_audit_tree.js';
-import { AuditLifecycleArchiver, AuditRecordPayload } from '../../systems/audit/audit_lifecycle_archiver.js';
+import { AuditLifecycleArchiver, ArchivableAuditRecord } from '../../systems/audit/audit_lifecycle_archiver.js';
 import { PCIHIPAAComplianceAuditor } from '../../systems/audit/pci_hipaa_compliance_auditor.js';
 import { AuditTamperAlarm, ChainRecord } from '../../systems/audit/audit_tamper_alarm.js';
 import * as crypto from 'crypto';
@@ -33,7 +33,7 @@ describe('Advanced Audit Subsystem Test Suite', () => {
 
   it('should partition records by retention window and seal immutable archive batches', () => {
     const now = new Date('2026-09-15T00:00:00Z');
-    const records: AuditRecordPayload[] = [
+    const records: ArchivableAuditRecord[] = [
       { id: '1', action: 'ORDER_PLACED', entityType: 'order', entityId: 'o1', createdAt: new Date('2026-09-10'), hash: 'h1' }, // Hot (<90 days)
       { id: '2', action: 'USER_REGISTERED', entityType: 'user', entityId: 'u1', createdAt: new Date('2025-12-01'), hash: 'h2' }, // Cold (>90 days)
       { id: '3', action: 'PAYMENT_CAPTURED', entityType: 'payment', entityId: 'p1', createdAt: new Date('2025-11-15'), hash: 'h3' }, // Cold (>90 days)
