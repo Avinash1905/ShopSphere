@@ -1,4 +1,4 @@
-export * from './parser.js';
+﻿export * from './parser.js';
 export * from './normalizer.js';
 export * from './tokenizer.js';
 export * from './exact_matcher.js';
@@ -14,3 +14,9 @@ export * from './search_cache.js';
 export * from './search_validator.js';
 export * from './search_errors.js';
 export * from './search_pipeline.js';
+export * from './synonym_expansion_engine.js';
+export * from './spell_corrector.js';
+export * from './boolean_proximity_parser.js';
+export * from './vector_semantic_search.js';
+export * from './disjunctive_facet_engine.js';
+export * from './clickthrough_reranker.js';

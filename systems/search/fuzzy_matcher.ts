@@ -1,4 +1,4 @@
-export interface TrieNode {
+﻿export interface TrieNode {
   children: Map<string, TrieNode>;
   isEndOfWord: boolean;
   frequency: number;
@@ -83,6 +83,10 @@ export class FuzzyMatcher {
     }
 
     return matrix[s1.length][s2.length];
+  }
+
+  public static levenshteinDistance(a: string, b: string): number {
+    return this.levenshtein(a, b);
   }
 
   /**

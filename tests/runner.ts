@@ -6,6 +6,7 @@ import './integration/schema_comparator.test.js';
 import './integration/repository_integration.test.js';
 import './integration/repository_advanced.test.js';
 import './integration/search_integration.test.js';
+import './integration/search_advanced.test.js';
 import './integration/analytics_integration.test.js';
 import './integration/security_integration.test.js';
 import './integration/audit_integration.test.js';
