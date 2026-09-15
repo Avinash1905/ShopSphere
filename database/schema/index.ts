@@ -1,4 +1,4 @@
-export * from './types.js';
+﻿export * from './types.js';
 export * from './user.schema.js';
 export * from './role_permission.schema.js';
 export * from './seller.schema.js';
@@ -14,6 +14,12 @@ export * from './review.schema.js';
 export * from './address.schema.js';
 export * from './notification.schema.js';
 export * from './audit_log.schema.js';
+export * from './schema_comparator.js';
+export * from './partition_manager.js';
+export * from './view_definitions.js';
+export * from './trigger_definitions.js';
+export * from './schema_graph_validator.js';
+export * from './index_advisor.js';
 
 import { SchemaRegistry, TableSchema, ColumnDefinition } from './types.js';
 

@@ -1,4 +1,4 @@
-import { describe, it } from '../../systems/testing/test_runner_framework.js';
+﻿import { describe, it } from '../../systems/testing/test_runner_framework.js';
 import { Assert } from '../../systems/testing/assertion_library.js';
 import { MockDatabaseAdapter } from '../../systems/testing/mock_database.js';
 import { createDefaultMigrationRunner } from '../../database/migrations/index.js';
@@ -28,17 +28,17 @@ describe('Database Integration Test Suite', () => {
     const db = new MockDatabaseAdapter();
     const runner = createDefaultMigrationRunner(db);
 
-    // 1. Initial pending count
+    // 1. Initial pending count (10 total registered migrations: 001 - 010)
     const pending = await runner.getPendingMigrations();
-    Assert.equal(pending.length, 7, 'Pending migrations count');
+    Assert.equal(pending.length, 10, 'Pending migrations count');
 
     // 2. Run all migrations up
     const upRes = await runner.up();
-    Assert.equal(upRes.appliedCount, 7, 'Applied migrations count');
+    Assert.equal(upRes.appliedCount, 10, 'Applied migrations count');
 
     // 3. Verify applied migrations in history table
     const applied = await runner.getAppliedMigrations();
-    Assert.equal(applied.length, 7, 'Recorded migrations in history table');
+    Assert.equal(applied.length, 10, 'Recorded migrations in history table');
     Assert.equal(applied[0].version, '20260915000001');
     Assert.greaterThan(applied[0].checksum.length, 10, 'Migration checksum exists');
 

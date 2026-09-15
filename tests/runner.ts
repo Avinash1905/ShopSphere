@@ -1,7 +1,8 @@
-import { TestRunner } from '../systems/testing/test_runner_framework.js';
+﻿import { TestRunner } from '../systems/testing/test_runner_framework.js';
 
 // Import Integration Tests
 import './integration/database_integration.test.js';
+import './integration/schema_comparator.test.js';
 import './integration/repository_integration.test.js';
 import './integration/search_integration.test.js';
 import './integration/analytics_integration.test.js';
