@@ -1,0 +1,35 @@
+{
+  "name": "@shopsphere/database-and-systems",
+  "version": "1.0.0",
+  "description": "ShopSphere Database and Advanced Systems Layer - Member 3 Scope",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "test": "node dist/tests/runner.js",
+    "test:integration": "node dist/tests/integration_runner.js",
+    "test:e2e": "node dist/tests/e2e_runner.js",
+    "test:security": "node dist/tests/security_runner.js",
+    "test:performance": "node dist/tests/performance_runner.js",
+    "migrate": "node dist/database/migrations/runner.js",
+    "seed": "node dist/database/seeds/seed_runner.js",
+    "benchmark": "node dist/systems/testing/performance_benchmark.js"
+  },
+  "keywords": [
+    "shopsphere",
+    "database",
+    "search-engine",
+    "analytics",
+    "security",
+    "audit",
+    "testing"
+  ],
+  "author": "ShopSphere Member 3",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.5.1",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
