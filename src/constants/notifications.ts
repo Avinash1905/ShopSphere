@@ -1,0 +1,48 @@
+import { Notification } from '../types';
+
+export const MOCK_NOTIFICATIONS: Notification[] = [
+  {
+    id: 'notif-1',
+    userId: 'user-customer-1',
+    category: 'orders',
+    title: 'Order Delivered Successfully!',
+    message: 'Your order ORD-2024-98214 containing Apple iPhone 15 Pro Max has been delivered to Seattle, WA.',
+    link: '/customer/orders/ord-98214',
+    isRead: false,
+    priority: 'high',
+    createdAt: '2024-02-18T14:22:00Z',
+  },
+  {
+    id: 'notif-2',
+    userId: 'user-customer-1',
+    category: 'promotions',
+    title: 'Weekend Flash Sale Alert ⚡',
+    message: 'Use code TECH50 to save $50 on top-tier noise cancelling audio and laptop workstations.',
+    link: '/catalog?category=electronics',
+    isRead: false,
+    priority: 'normal',
+    createdAt: '2024-02-19T09:00:00Z',
+  },
+  {
+    id: 'notif-3',
+    userId: 'user-customer-1',
+    category: 'orders',
+    title: 'Order Dispatched with UPS',
+    message: 'Your package ORD-2024-98255 is on its way. Track live delivery milestone progress.',
+    link: '/customer/orders/ord-98255/track',
+    isRead: true,
+    priority: 'normal',
+    createdAt: '2024-02-21T10:00:00Z',
+  },
+  {
+    id: 'notif-4',
+    userId: 'user-customer-1',
+    category: 'security',
+    title: 'New Sign-in from Chrome on Windows',
+    message: 'We noticed a login from IP 198.51.100.24 (Seattle, US). If this was not you, secure your account.',
+    link: '/customer/profile/security',
+    isRead: true,
+    priority: 'high',
+    createdAt: '2024-02-21T11:45:00Z',
+  },
+];
