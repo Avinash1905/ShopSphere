@@ -86,8 +86,14 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 export default app;
 
+import { initializeDatabase } from '../database/db';
+
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
-    console.log(`⚡ ShopSphere API Server running on port ${PORT}`);
+  initializeDatabase().then(() => {
+    app.listen(PORT, () => {
+      console.log(`⚡ ShopSphere API Server running on port ${PORT}`);
+    });
+  }).catch(err => {
+    console.error('Failed to initialize database:', err);
   });
 }
