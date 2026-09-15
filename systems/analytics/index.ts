@@ -1,4 +1,4 @@
-export * from './metrics_calculator.js';
+﻿export * from './metrics_calculator.js';
 export * from './aggregation_engine.js';
 export * from './time_series.js';
 export * from './customer_analytics.js';
@@ -8,3 +8,8 @@ export * from './cohort_analytics.js';
 export * from './report_exporter.js';
 export * from './analytics_validator.js';
 export * from './analytics_service.js';
+export * from './rfm_segmentation.js';
+export * from './olap_cube_engine.js';
+export * from './funnel_dropoff_analyzer.js';
+export * from './demand_forecaster.js';
+export * from './anomaly_detector.js';

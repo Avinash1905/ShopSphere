@@ -8,6 +8,7 @@ import './integration/repository_advanced.test.js';
 import './integration/search_integration.test.js';
 import './integration/search_advanced.test.js';
 import './integration/analytics_integration.test.js';
+import './integration/analytics_advanced.test.js';
 import './integration/security_integration.test.js';
 import './integration/audit_integration.test.js';
 
