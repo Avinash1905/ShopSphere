@@ -1,0 +1,46 @@
+{
+  "name": "shopsphere-backend",
+  "version": "1.0.0",
+  "description": "ShopSphere Enterprise Backend - Member 2 Phase 1 (Foundation, Auth & Users)",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "node --import tsx src/server.ts",
+    "test": "node --test dist/tests/unit/*.test.js dist/tests/integration/*.test.js",
+    "typecheck": "tsc --noEmit",
+    "count-loc": "node scripts/count-loc.js"
+  },
+  "keywords": [
+    "shopsphere",
+    "ecommerce",
+    "backend",
+    "auth",
+    "rbac",
+    "users"
+  ],
+  "author": "Member 2 - Backend Developer",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.10.1",
+    "@types/supertest": "^6.0.2",
+    "@types/uuid": "^10.0.0",
+    "supertest": "^7.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
