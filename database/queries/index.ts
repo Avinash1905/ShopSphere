@@ -26,3 +26,6 @@ export * from './fx_revaluation_unrealized_gain_loss_query.js';
 
 export * from './b2b_tiered_pricing_evaluator_query.js';
 export * from './b2b_dunning_aging_receivables_query.js';
+
+export * from './hnsw_vector_graph_query.js';
+export * from './collaborative_filtering_matrix_factorization_query.js';

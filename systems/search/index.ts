@@ -30,3 +30,5 @@ export * from './personalized_collaborative_reranker.js';
 export * from './negative_keyword_guard.js';
 export * from './search_index_snapshot_manager.js';
 export * from './explainable_search_debugger.js';
+
+export * from './vector_semantic_reranker.js';

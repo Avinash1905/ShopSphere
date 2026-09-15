@@ -51,3 +51,6 @@ export * from './seller_tax_1099k_repository.js';
 
 export * from './b2b_corporate_account_repository.js';
 export * from './b2b_quote_rfq_repository.js';
+
+export * from './product_embedding_repository.js';
+export * from './multi_armed_bandit_repository.js';

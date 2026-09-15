@@ -47,6 +47,7 @@ import { Migration020CreateExtendedIndexesAndViews } from './020_create_extended
 import { Migration021CreateWmsAndLogisticsTables } from './021_create_wms_and_logistics_tables.js';
 import { Migration022CreateGeneralLedgerTables } from './022_create_general_ledger_tables.js';
 import { Migration023CreateB2BWholesaleTables } from './023_create_b2b_wholesale_tables.js';
+import { Migration024CreateMLRecommendationsTables } from './024_create_ml_recommendations_tables.js';
 
 export function createDefaultMigrationRunner(dbAdapter: any): MigrationRunner {
   const runner = new MigrationRunner(dbAdapter);
@@ -73,6 +74,7 @@ export function createDefaultMigrationRunner(dbAdapter: any): MigrationRunner {
   runner.register(Migration021CreateWmsAndLogisticsTables);
   runner.register(Migration022CreateGeneralLedgerTables);
   runner.register(Migration023CreateB2BWholesaleTables);
+  runner.register(Migration024CreateMLRecommendationsTables);
   return runner;
 }
 
@@ -81,3 +83,5 @@ export * from './021_create_wms_and_logistics_tables.js';
 export * from './022_create_general_ledger_tables.js';
 
 export * from './023_create_b2b_wholesale_tables.js';
+
+export * from './024_create_ml_recommendations_tables.js';
