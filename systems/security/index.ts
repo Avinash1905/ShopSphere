@@ -1,4 +1,4 @@
-export * from './sanitizer.js';
+﻿export * from './sanitizer.js';
 export * from './token_bucket.js';
 export * from './sliding_window.js';
 export * from './rate_limiter.js';
@@ -10,3 +10,8 @@ export * from './secure_query_guard.js';
 export * from './security_events.js';
 export * from './security_validator.js';
 export * from './security_service.js';
+export * from './crypto_key_manager.js';
+export * from './jwt_session_engine.js';
+export * from './abac_policy_evaluator.js';
+export * from './csp_header_generator.js';
+export * from './leaky_bucket_shaper.js';
