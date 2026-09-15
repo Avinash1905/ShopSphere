@@ -1,4 +1,4 @@
-﻿export * from './types.js';
+export * from './types.js';
 export * from './user.schema.js';
 export * from './role_permission.schema.js';
 export * from './seller.schema.js';
@@ -20,6 +20,22 @@ export * from './view_definitions.js';
 export * from './trigger_definitions.js';
 export * from './schema_graph_validator.js';
 export * from './index_advisor.js';
+
+// Extended Enterprise Schemas
+export * from './auth_extended.schema.js';
+export * from './seller_extended.schema.js';
+export * from './catalog_extended.schema.js';
+export * from './inventory_extended.schema.js';
+export * from './order_extended.schema.js';
+export * from './payment_extended.schema.js';
+export * from './engagement_extended.schema.js';
+export * from './notification_extended.schema.js';
+export * from './audit_extended.schema.js';
+
+// Schema Engines & Generators
+export * from './mysql_ddl_generator.js';
+export * from './temporal_table_manager.js';
+export * from './schema_validator.js';
 
 import { SchemaRegistry, TableSchema, ColumnDefinition } from './types.js';
 
